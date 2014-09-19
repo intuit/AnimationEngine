@@ -5,6 +5,24 @@ INTUAnimationEngine provides a friendly interface to drive custom animations usi
 
 INTUAnimationEngine includes an extensive library of easing functions that can be used to customize animation timing. A complete library of interpolation functions is also included to animate any type of value or property, including those that are not animatable by Core Animation.
 
+## Installation
+*INTUAnimationEngine requires iOS 5.0 or later.*
+
+**Using [CocoaPods](http://cocoapods.org)**
+
+1.	Add the pod `INTUAnimationEngine` to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html).
+
+    	pod 'INTUAnimationEngine'
+
+2.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
+3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
+
+**Manually from GitHub**
+
+1.	Download all the files in the [Source directory](https://github.com/intuit/AnimationEngine/tree/master/Source).
+2.	Add all the files to your Xcode project (drag and drop is easiest).
+3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
+
 ## Usage
 The major difference between INTUAnimationEngine and the UIView animation methods is how the `animations` block works. With the UIView methods, the `animations` block is only executed once, and the changes made to views within this block represent the new state at the end of the animation.
 
@@ -88,24 +106,6 @@ When interpolating between two colors, both colors must be in the same color spa
 
 ## Example Project
 An [example project](https://github.com/intuit/AnimationEngine/tree/master/AnimationEngineExample) is provided. It requires Xcode 6 and iOS 6.0 or later.
-
-## Installation
-*INTUAnimationEngine requires iOS 5.0 or later.*
-
-**Using [CocoaPods](http://cocoapods.org)**
-
-1.	Add the pod `INTUAnimationEngine` to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html).
-
-    	pod 'INTUAnimationEngine'
-
-2.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
-3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
-
-**Manually from GitHub**
-
-1.	Download all the files in the [Source directory](https://github.com/intuit/AnimationEngine/tree/master/Source).
-2.	Add all the files to your Xcode project (drag and drop is easiest).
-3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
 
 ## Issues & Contributions
 Please [open an issue here on GitHub](https://github.com/intuit/AnimationEngine/issues/new) if you have a problem, suggestion, or other comment.
