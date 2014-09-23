@@ -1,4 +1,4 @@
-# INTUAnimationEngine
+# ![INTUAnimationEngine](https://github.com/intuit/AnimationEngine/blob/master/Images/INTUAnimationEngine.png?raw=true)
 INTUAnimationEngine makes it easy to build advanced custom animations on iOS.
 
 INTUAnimationEngine provides a friendly interface to drive custom animations using a CADisplayLink, inspired by the UIView block-based animation API. It enables interactive animations (normally driven by user input, such as a pan or pinch gesture) to run automatically over a given duration. It can also be used to get a callback every frame of an animation.
