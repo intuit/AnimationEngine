@@ -34,16 +34,19 @@
  */
 @interface INTUAnimation : NSObject
 
-@property (nonatomic, readonly) NSInteger animationID;
+@property (nonatomic, readonly) INTUAnimationID animationID;
 
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) NSTimeInterval delay;
 @property (nonatomic, assign) INTUEasingFunction easingFunction;
+@property (nonatomic, assign) BOOL repeat; // INTUAnimationOptionRepeat
+@property (nonatomic, assign) BOOL autoreverse; // INTUAnimationOptionAutoreverse
 @property (nonatomic, copy) void (^animations)(CGFloat);
 @property (nonatomic, copy) void (^completion)(BOOL);
 
 @property (nonatomic, assign) CFTimeInterval startTime;
 
+- (void)applyOptions:(INTUAnimationOptions)options;
 - (CGFloat)percentComplete;
 - (CGFloat)progress;
 - (void)tick;
@@ -53,12 +56,12 @@
 
 @implementation INTUAnimation
 
-static NSInteger _nextAnimationID = 0;
+static INTUAnimationID _nextAnimationID = 0;
 
 /**
  Returns the next animation ID (unique within the lifetime of the application).
  */
-+ (NSInteger)getNextAnimationID
++ (INTUAnimationID)getNextAnimationID
 {
     _nextAnimationID++;
     return _nextAnimationID;
@@ -71,6 +74,12 @@ static NSInteger _nextAnimationID = 0;
         _animationID = [[self class] getNextAnimationID];
     }
     return self;
+}
+
+- (void)applyOptions:(INTUAnimationOptions)options
+{
+    self.repeat = options & INTUAnimationOptionRepeat;
+    self.autoreverse = options & INTUAnimationOptionAutoreverse;
 }
 
 /**
@@ -88,7 +97,15 @@ static NSInteger _nextAnimationID = 0;
  */
 - (CGFloat)percentComplete
 {
-    return MAX(0.0, MIN(1.0, ((CACurrentMediaTime() - self.startTime) - self.delay) / self.duration));
+    CGFloat percent = ((CACurrentMediaTime() - self.startTime) - self.delay) / self.duration;
+    if (self.repeat) {
+        NSUInteger repeatCount = (NSUInteger)percent;
+        percent = percent - repeatCount;
+        if (self.autoreverse) {
+            percent = (repeatCount % 2 == 0) ? percent : (1.0 - percent);
+        }
+    }
+    return MAX(0.0, MIN(1.0, percent));
 }
 
 /**
@@ -156,10 +173,10 @@ static id _sharedInstance;
     return _sharedInstance;
 }
 
-+ (NSInteger)animateWithDuration:(NSTimeInterval)duration
-                           delay:(NSTimeInterval)delay
-                      animations:(void (^)(CGFloat percentage))animations
-                      completion:(void (^)(BOOL finished))completion
++ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+                                 delay:(NSTimeInterval)delay
+                            animations:(void (^)(CGFloat percentage))animations
+                            completion:(void (^)(BOOL finished))completion
 {
     INTUAnimation *animation = [INTUAnimation new];
     animation.duration = duration;
@@ -170,11 +187,26 @@ static id _sharedInstance;
     return animation.animationID;
 }
 
-+ (NSInteger)animateWithDuration:(NSTimeInterval)duration
-                           delay:(NSTimeInterval)delay
-                          easing:(INTUEasingFunction)easingFunction
-                      animations:(void (^)(CGFloat progress))animations
-                      completion:(void (^)(BOOL finished))completion
++ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+                                 delay:(NSTimeInterval)delay
+                                easing:(INTUEasingFunction)easingFunction
+                            animations:(void (^)(CGFloat progress))animations
+                            completion:(void (^)(BOOL finished))completion
+{
+    return [self animateWithDuration:duration
+                               delay:delay
+                              easing:easingFunction
+                             options:INTUAnimationOptionNone
+                          animations:animations
+                          completion:completion];
+}
+
++ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+                                 delay:(NSTimeInterval)delay
+                                easing:(INTUEasingFunction)easingFunction
+                               options:(INTUAnimationOptions)options
+                            animations:(void (^)(CGFloat progress))animations
+                            completion:(void (^)(BOOL finished))completion
 {
     INTUAnimation *animation = [INTUAnimation new];
     animation.duration = duration;
@@ -182,6 +214,7 @@ static id _sharedInstance;
     animation.easingFunction = easingFunction;
     animation.animations = animations;
     animation.completion = completion;
+    [animation applyOptions:options];
     [[self sharedInstance] addAnimation:animation];
     return animation.animationID;
 }
@@ -189,7 +222,7 @@ static id _sharedInstance;
 /**
  Cancels the currently active animation with the given animation ID. The completion block for the animation will be executed, with the finished parameter equal to NO.
  */
-+ (void)cancelAnimationWithID:(NSInteger)animationID
++ (void)cancelAnimationWithID:(INTUAnimationID)animationID
 {
     [[self sharedInstance] removeAnimationWithID:animationID didFinish:NO];
 }
@@ -213,7 +246,7 @@ static id _sharedInstance;
 {
     NSMutableArray *finishedAnimationIDs = [NSMutableArray new];
     for (INTUAnimation *animation in [self.activeAnimations objectEnumerator]) {
-        if ([animation percentComplete] >= 1.0) {
+        if (animation.repeat == NO && [animation percentComplete] >= 1.0) {
             [finishedAnimationIDs addObject:@(animation.animationID)];
         }
         [animation tick];
@@ -232,7 +265,7 @@ static id _sharedInstance;
     [self.activeAnimations setObject:animation forKey:@(animation.animationID)];
 }
 
-- (void)removeAnimationWithID:(NSInteger)animationID didFinish:(BOOL)finished
+- (void)removeAnimationWithID:(INTUAnimationID)animationID didFinish:(BOOL)finished
 {
     INTUAnimation *animation = [self.activeAnimations objectForKey:@(animationID)];
     [animation complete:finished];

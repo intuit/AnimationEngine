@@ -31,7 +31,13 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
 
 @interface ViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *demoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *demoLabel; // the view that is animated in the demo
+
+@property (weak, nonatomic) IBOutlet UIButton *toggleButton; // control to cancel/restart animation
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel; // displays the current progress
+
+@property (nonatomic, assign) INTUAnimationID animationID;
+
 
 @property (nonatomic, assign) CGPoint startCenter;
 @property (nonatomic, assign) CGPoint endCenter;
@@ -62,8 +68,8 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
 {
     [super viewDidAppear:animated];
     
-    self.startCenter = CGPointMake(self.view.center.x * 0.7, self.view.center.y * 0.5);
-    self.endCenter = CGPointMake(self.view.center.x * 1.2, self.view.center.y * 1.4);
+    self.startCenter = CGPointMake(self.view.center.x * 0.6, self.view.center.y * 0.4);
+    self.endCenter = CGPointMake(self.view.center.x * 1.2, self.view.center.y * 1.3);
     
     self.startCornerRadius = 0.0;
     self.endCornerRadius = 40.0;
@@ -79,46 +85,51 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
     // NSTextAlignment can't be linearly interpolated because it is a few discrete values
     self.textAlignmentValues = @[@(NSTextAlignmentLeft), @(NSTextAlignmentCenter), @(NSTextAlignmentRight)];
     
-    [self animateForward];
+    [self startAnimation];
 }
 
-- (void)animateForward
+- (void)startAnimation
 {
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuadratic
-                                  animations:^(CGFloat progress) {
-                                      self.demoLabel.center = INTUInterpolateCGPoint(self.startCenter, self.endCenter, progress);
-                                      self.demoLabel.layer.cornerRadius = INTUInterpolateCGFloat(self.startCornerRadius, self.endCornerRadius, progress);
-                                      self.demoLabel.backgroundColor = INTUInterpolate(self.startColor, self.endColor, progress);
-                                      CGFloat rotation = INTUInterpolateCGFloat(self.startRotation, self.endRotation, progress);
-                                      self.demoLabel.transform = CGAffineTransformMakeRotation(rotation);
-                                      self.demoLabel.textAlignment = [INTUInterpolateDiscreteValues(self.textAlignmentValues, progress) integerValue];
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // Animate back to the starting state
-                                      [self animateReverse];
-                                  }];
+    self.animationID = [INTUAnimationEngine animateWithDuration:kAnimationDuration
+                                                          delay:0.0
+                                                         easing:INTUEaseInOutQuadratic
+                                                        options:INTUAnimationOptionRepeat | INTUAnimationOptionAutoreverse
+                                                     animations:^(CGFloat progress) {
+                                                         self.demoLabel.center = INTUInterpolateCGPoint(self.startCenter, self.endCenter, progress);
+                                                         self.demoLabel.layer.cornerRadius = INTUInterpolateCGFloat(self.startCornerRadius, self.endCornerRadius, progress);
+                                                         self.demoLabel.backgroundColor = INTUInterpolate(self.startColor, self.endColor, progress);
+                                                         CGFloat rotation = INTUInterpolateCGFloat(self.startRotation, self.endRotation, progress);
+                                                         self.demoLabel.transform = CGAffineTransformMakeRotation(rotation);
+                                                         self.demoLabel.textAlignment = [INTUInterpolateDiscreteValues(self.textAlignmentValues, progress) integerValue];
+                                                         
+                                                         self.progressLabel.text = [NSString stringWithFormat:@"Progress: %.2f", progress];
+                                                     }
+                                                     completion:^(BOOL finished) {
+                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is cancelled.
+                                                         self.progressLabel.text = finished ? @"Animation Completed" : @"Animation Cancelled";
+                                                     }];
+    
+    [self.toggleButton setTitle:@"Cancel Animation" forState:UIControlStateNormal];
 }
 
-- (void)animateReverse
+- (void)stopAnimation
 {
-    [INTUAnimationEngine animateWithDuration:kAnimationDuration
-                                       delay:0.0
-                                      easing:INTUEaseInOutQuintic
-                                  animations:^(CGFloat progress) {
-                                      // Pass in (1.0 - progress) to the interpolation functions to reverse them. (Reversing the order of the first two arguments instead would achieve the same effect.)
-                                      self.demoLabel.center = INTUInterpolateCGPoint(self.startCenter, self.endCenter, 1.0 - progress);
-                                      self.demoLabel.layer.cornerRadius = INTUInterpolateCGFloat(self.startCornerRadius, self.endCornerRadius, 1.0 - progress);
-                                      self.demoLabel.backgroundColor = INTUInterpolate(self.startColor, self.endColor, 1.0 - progress);
-                                      CGFloat rotation = INTUInterpolateCGFloat(self.startRotation, self.endRotation, 1.0 - progress);
-                                      self.demoLabel.transform = CGAffineTransformMakeRotation(rotation);
-                                      self.demoLabel.textAlignment = [INTUInterpolateDiscreteValues(self.textAlignmentValues, 1.0 - progress) integerValue];
-                                  }
-                                  completion:^(BOOL finished) {
-                                      // Loop the animation
-                                      [self animateForward];
-                                  }];
+    [INTUAnimationEngine cancelAnimationWithID:self.animationID];
+    self.animationID = NSNotFound;
+    
+    [self.toggleButton setTitle:@"Restart Animation" forState:UIControlStateNormal];
+}
+
+/**
+ Callback when the "Start Animation"/"Cancel Animation" button is tapped.
+ */
+- (IBAction)toggleAnimation:(UIButton *)sender
+{
+    if (self.animationID == NSNotFound) {
+        [self startAnimation];
+    } else {
+        [self stopAnimation];
+    }
 }
 
 @end
