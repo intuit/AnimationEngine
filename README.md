@@ -29,27 +29,29 @@ The major difference between INTUAnimationEngine and the UIView animation method
 With INTUAnimationEngine, the `animations` block is called many times during the animation (once per frame), and each time it is called, your code should update the state of views based upon the current value of the `percentage` or `progress` passed into the block. Typically, you'll want to use one of the interpolation functions included in this library to help generate all the intermediate values between the start and end states for a given property.
 
 ### Animation Engine
-INTUAnimationEngine has two API methods that can be used to start an animation.
+INTUAnimationEngine has a few API methods that can be used to start an animation.
 
 #### Without Easing (Linear)
-	+ (NSInteger)animateWithDuration:(NSTimeInterval)duration
-	                           delay:(NSTimeInterval)delay
-	                      animations:(void (^)(CGFloat percentage))animations
-	                      completion:(void (^)(BOOL finished))completion;
+	+ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+	                                 delay:(NSTimeInterval)delay
+	                            animations:(void (^)(CGFloat percentage))animations
+	                            completion:(void (^)(BOOL finished))completion;
 
 This method will start an animation that calls the `animations` block each frame of the animation, passing in a `percentage` value that represents the current percentage complete. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was cancelled.
 
 #### With Easing
-	+ (NSInteger)animateWithDuration:(NSTimeInterval)duration
-	                           delay:(NSTimeInterval)delay
-	                          easing:(INTUEasingFunction)easingFunction
-	                      animations:(void (^)(CGFloat progress))animations
-	                      completion:(void (^)(BOOL finished))completion;
+	+ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+	                                 delay:(NSTimeInterval)delay
+	                                easing:(INTUEasingFunction)easingFunction
+	                            animations:(void (^)(CGFloat progress))animations
+	                            completion:(void (^)(BOOL finished))completion;
 
 This method will start an animation that calls the `animations` block each frame of the animation, passing in a `progress` value that represents the current progress of the animation (taking into account the easing function). The `easingFunction` can be any of the easing functions in [`INTUEasingFunctions.h`](https://github.com/intuit/AnimationEngine/tree/master/Source/INTUEasingFunctions.h), or a custom function. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was cancelled.
 
+There is also another variant of the above method that takes an `options:` parameter, which is a mask of `INTUAnimationOptions`. This can be used to repeat or autoreverse animations.
+
 #### Canceling Animations
-	+ (void)cancelAnimationWithID:(NSInteger)animationID;
+	+ (void)cancelAnimationWithID:(INTUAnimationID)animationID;
 
 When starting an animation, you can store the returned animation ID, and pass it to the above method to cancel the animation before it completes. If the animation is cancelled, the completion block will execute with `finished` parameter equal to NO.
 
