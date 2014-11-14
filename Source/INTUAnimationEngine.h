@@ -24,8 +24,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "INTUEasingFunctions.h"
-#include "INTUInterpolationFunctions.h"
+#import "INTUEasingFunctions.h"
+#import "INTUInterpolationFunctions.h"
 
 
 /**
