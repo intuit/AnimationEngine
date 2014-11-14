@@ -27,39 +27,39 @@
 #include <math.h>
 
 // Modeled after the line y = x
-INTUEasingFunction INTULinear = ^(CGFloat p) {
+INTUEasingFunction INTULinear = ^CGFloat (CGFloat p) {
     return p;
 };
 
 // Modeled after quarter-cycle of sine wave
-INTUEasingFunction INTUEaseInSine = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInSine = ^CGFloat (CGFloat p) {
 	return sin((p - 1) * M_PI_2) + 1;
 };
 
 // Modeled after quarter-cycle of sine wave (different phase)
-INTUEasingFunction INTUEaseOutSine = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutSine = ^CGFloat (CGFloat p) {
 	return sin(p * M_PI_2);
 };
 
 // Modeled after half sine wave
-INTUEasingFunction INTUEaseInOutSine = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutSine = ^CGFloat (CGFloat p) {
 	return 0.5 * (1 - cos(p * M_PI));
 };
 
 // Modeled after the parabola y = x^2
-INTUEasingFunction INTUEaseInQuadratic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInQuadratic = ^CGFloat (CGFloat p) {
 	return p * p;
 };
 
 // Modeled after the parabola y = -x^2 + 2x
-INTUEasingFunction INTUEaseOutQuadratic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutQuadratic = ^CGFloat (CGFloat p) {
 	return -(p * (p - 2));
 };
 
 // Modeled after the piecewise quadratic
 // y = (1/2)((2x)^2)             ; [0, 0.5)
 // y = -(1/2)((2x-1)*(2x-3) - 1) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutQuadratic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutQuadratic = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 2 * p * p;
@@ -71,12 +71,12 @@ INTUEasingFunction INTUEaseInOutQuadratic = ^(CGFloat p) {
 };
 
 // Modeled after the cubic y = x^3
-INTUEasingFunction INTUEaseInCubic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInCubic = ^CGFloat (CGFloat p) {
 	return p * p * p;
 };
 
 // Modeled after the cubic y = (x - 1)^3 + 1
-INTUEasingFunction INTUEaseOutCubic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutCubic = ^CGFloat (CGFloat p) {
 	CGFloat f = (p - 1);
 	return f * f * f + 1;
 };
@@ -84,7 +84,7 @@ INTUEasingFunction INTUEaseOutCubic = ^(CGFloat p) {
 // Modeled after the piecewise cubic
 // y = (1/2)((2x)^3)       ; [0, 0.5)
 // y = (1/2)((2x-2)^3 + 2) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutCubic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutCubic = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 4 * p * p * p;
@@ -97,12 +97,12 @@ INTUEasingFunction INTUEaseInOutCubic = ^(CGFloat p) {
 };
 
 // Modeled after the quartic x^4
-INTUEasingFunction INTUEaseInQuartic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInQuartic = ^CGFloat (CGFloat p) {
 	return p * p * p * p;
 };
 
 // Modeled after the quartic y = 1 - (x - 1)^4
-INTUEasingFunction INTUEaseOutQuartic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutQuartic = ^CGFloat (CGFloat p) {
 	CGFloat f = (p - 1);
 	return f * f * f * (1 - p) + 1;
 };
@@ -110,7 +110,7 @@ INTUEasingFunction INTUEaseOutQuartic = ^(CGFloat p) {
 // Modeled after the piecewise quartic
 // y = (1/2)((2x)^4)        ; [0, 0.5)
 // y = -(1/2)((2x-2)^4 - 2) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutQuartic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutQuartic = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 8 * p * p * p * p;
@@ -123,12 +123,12 @@ INTUEasingFunction INTUEaseInOutQuartic = ^(CGFloat p) {
 };
 
 // Modeled after the quintic y = x^5
-INTUEasingFunction INTUEaseInQuintic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInQuintic = ^CGFloat (CGFloat p) {
 	return p * p * p * p * p;
 };
 
 // Modeled after the quintic y = (x - 1)^5 + 1
-INTUEasingFunction INTUEaseOutQuintic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutQuintic = ^CGFloat (CGFloat p) {
 	CGFloat f = (p - 1);
 	return f * f * f * f * f + 1;
 };
@@ -136,7 +136,7 @@ INTUEasingFunction INTUEaseOutQuintic = ^(CGFloat p) {
 // Modeled after the piecewise quintic
 // y = (1/2)((2x)^5)       ; [0, 0.5)
 // y = (1/2)((2x-2)^5 + 2) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutQuintic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutQuintic = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 16 * p * p * p * p * p;
@@ -149,19 +149,19 @@ INTUEasingFunction INTUEaseInOutQuintic = ^(CGFloat p) {
 };
 
 // Modeled after the exponential function y = 2^(10(x - 1))
-INTUEasingFunction INTUEaseInExponential = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInExponential = ^CGFloat (CGFloat p) {
 	return (p == 0.0) ? p : pow(2, 10 * (p - 1));
 };
 
 // Modeled after the exponential function y = -2^(-10x) + 1
-INTUEasingFunction INTUEaseOutExponential = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutExponential = ^CGFloat (CGFloat p) {
 	return (p == 1.0) ? p : 1 - pow(2, -10 * p);
 };
 
 // Modeled after the piecewise exponential
 // y = (1/2)2^(10(2x - 1))         ; [0,0.5)
 // y = -(1/2)*2^(-10(2x - 1))) + 1 ; [0.5,1]
-INTUEasingFunction INTUEaseInOutExponential = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutExponential = ^CGFloat (CGFloat p) {
 	if(p == 0.0 || p == 1.0) return p;
 	
 	if(p < 0.5)
@@ -175,19 +175,19 @@ INTUEasingFunction INTUEaseInOutExponential = ^(CGFloat p) {
 };
 
 // Modeled after shifted quadrant IV of unit circle
-INTUEasingFunction INTUEaseInCircular = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInCircular = ^CGFloat (CGFloat p) {
 	return 1 - sqrt(1 - (p * p));
 };
 
 // Modeled after shifted quadrant II of unit circle
-INTUEasingFunction INTUEaseOutCircular = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutCircular = ^CGFloat (CGFloat p) {
 	return sqrt((2 - p) * p);
 };
 
 // Modeled after the piecewise circular function
 // y = (1/2)(1 - sqrt(1 - 4x^2))           ; [0, 0.5)
 // y = (1/2)(sqrt(-(2x - 3)*(2x - 1)) + 1) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutCircular = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutCircular = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 0.5 * (1 - sqrt(1 - 4 * (p * p)));
@@ -199,12 +199,12 @@ INTUEasingFunction INTUEaseInOutCircular = ^(CGFloat p) {
 };
 
 // Modeled after the overshooting cubic y = x^3-x*sin(x*pi)
-INTUEasingFunction INTUEaseInBack = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInBack = ^CGFloat (CGFloat p) {
 	return p * p * p - p * sin(p * M_PI);
 };
 
 // Modeled after overshooting cubic y = 1-((1-x)^3-(1-x)*sin((1-x)*pi))
-INTUEasingFunction INTUEaseOutBack = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutBack = ^CGFloat (CGFloat p) {
 	CGFloat f = (1 - p);
 	return 1 - (f * f * f - f * sin(f * M_PI));
 };
@@ -212,7 +212,7 @@ INTUEasingFunction INTUEaseOutBack = ^(CGFloat p) {
 // Modeled after the piecewise overshooting cubic function:
 // y = (1/2)*((2x)^3-(2x)*sin(2*x*pi))           ; [0, 0.5)
 // y = (1/2)*(1-((1-x)^3-(1-x)*sin((1-x)*pi))+1) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutBack = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutBack = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		CGFloat f = 2 * p;
@@ -226,19 +226,19 @@ INTUEasingFunction INTUEaseInOutBack = ^(CGFloat p) {
 };
 
 // Modeled after the damped sine wave y = sin(13pi/2*x)*pow(2, 10 * (x - 1))
-INTUEasingFunction INTUEaseInElastic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInElastic = ^CGFloat (CGFloat p) {
 	return sin(13 * M_PI_2 * p) * pow(2, 10 * (p - 1));
 };
 
 // Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*pow(2, -10x) + 1
-INTUEasingFunction INTUEaseOutElastic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutElastic = ^CGFloat (CGFloat p) {
 	return sin(-13 * M_PI_2 * (p + 1)) * pow(2, -10 * p) + 1;
 };
 
 // Modeled after the piecewise exponentially-damped sine wave:
 // y = (1/2)*sin(13pi/2*(2*x))*pow(2, 10 * ((2*x) - 1))      ; [0,0.5)
 // y = (1/2)*(sin(-13pi/2*((2x-1)+1))*pow(2,-10(2*x-1)) + 2) ; [0.5, 1]
-INTUEasingFunction INTUEaseInOutElastic = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutElastic = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 0.5 * sin(13 * M_PI_2 * (2 * p)) * pow(2, 10 * ((2 * p) - 1));
@@ -249,11 +249,11 @@ INTUEasingFunction INTUEaseInOutElastic = ^(CGFloat p) {
 	}
 };
 
-INTUEasingFunction INTUEaseInBounce = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInBounce = ^CGFloat (CGFloat p) {
 	return 1 - INTUEaseOutBounce(1 - p);
 };
 
-INTUEasingFunction INTUEaseOutBounce = ^(CGFloat p) {
+INTUEasingFunction INTUEaseOutBounce = ^CGFloat (CGFloat p) {
 	if(p < 4/11.0)
 	{
 		return (121 * p * p)/16.0;
@@ -272,7 +272,7 @@ INTUEasingFunction INTUEaseOutBounce = ^(CGFloat p) {
 	}
 };
 
-INTUEasingFunction INTUEaseInOutBounce = ^(CGFloat p) {
+INTUEasingFunction INTUEaseInOutBounce = ^CGFloat (CGFloat p) {
 	if(p < 0.5)
 	{
 		return 0.5 * INTUEaseInBounce(p*2);
