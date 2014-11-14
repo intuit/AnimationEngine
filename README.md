@@ -19,7 +19,7 @@ INTUAnimationEngine includes an extensive library of easing functions that can b
 
 **Manually from GitHub**
 
-1.	Download all the files in the [Source directory](https://github.com/intuit/AnimationEngine/tree/master/Source).
+1.	Download all the files in the [Source directory](Source).
 2.	Add all the files to your Xcode project (drag and drop is easiest).
 3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
 
@@ -46,7 +46,7 @@ This method will start an animation that calls the `animations` block each frame
 	                            animations:(void (^)(CGFloat progress))animations
 	                            completion:(void (^)(BOOL finished))completion;
 
-This method will start an animation that calls the `animations` block each frame of the animation, passing in a `progress` value that represents the current progress of the animation (taking into account the easing function). The `easingFunction` can be any of the easing functions in [`INTUEasingFunctions.h`](https://github.com/intuit/AnimationEngine/tree/master/Source/INTUEasingFunctions.h), or a custom function. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was cancelled.
+This method will start an animation that calls the `animations` block each frame of the animation, passing in a `progress` value that represents the current progress of the animation (taking into account the easing function). The `easingFunction` can be any of the easing functions in [`INTUEasingFunctions.h`](INTUEasingFunctions.h), or a block that defines a custom easing curve. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was cancelled.
 
 There is also another variant of the above method that takes an `options:` parameter, which is a mask of `INTUAnimationOptions`. This can be used to repeat or autoreverse animations.
 
@@ -56,10 +56,10 @@ There is also another variant of the above method that takes an `options:` param
 When starting an animation, you can store the returned animation ID, and pass it to the above method to cancel the animation before it completes. If the animation is cancelled, the completion block will execute with `finished` parameter equal to NO.
 
 ### Easing Functions
-[`INTUEasingFunctions.h`](https://github.com/intuit/AnimationEngine/tree/master/Source/INTUEasingFunctions.h) is a C library of standard easing functions. Here's a [handy cheat sheet](http://easings.net) that includes visualizations and animation demos for these functions.
+[`INTUEasingFunctions.h`](INTUEasingFunctions.h) is a library of standard easing functions. Here's a [handy cheat sheet](http://easings.net) that includes visualizations and animation demos for these functions.
 
 ### Interpolation Functions
-[`INTUInterpolationFunctions.h`](https://github.com/intuit/AnimationEngine/tree/master/Source/INTUInterpolationFunctions.h) is a C library of interpolation functions.
+[`INTUInterpolationFunctions.h`](INTUInterpolationFunctions.h) is a library of interpolation functions.
 
 #### Proximal Interpolation
 For discrete values (where linear interpolation does not make sense), there are two proxmial interpolation functions. For example:
@@ -107,7 +107,7 @@ When interpolating between two colors, both colors must be in the same color spa
 	[UIColor colorWithHue:0.0 saturation:0.0 brightness:1.0 alpha:1.0] // HSB color space; white
 
 ## Example Project
-An [example project](https://github.com/intuit/AnimationEngine/tree/master/AnimationEngineExample) is provided. It requires Xcode 6 and iOS 6.0 or later.
+An [example project](AnimationEngineExample) is provided. It requires Xcode 6 and iOS 6.0 or later.
 
 ## Issues & Contributions
 Please [open an issue here on GitHub](https://github.com/intuit/AnimationEngine/issues/new) if you have a problem, suggestion, or other comment.

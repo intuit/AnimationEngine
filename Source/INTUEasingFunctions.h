@@ -26,67 +26,67 @@
 #ifndef INTU_EASING_FUNCTIONS_H
 #define INTU_EASING_FUNCTIONS_H
 
-#include <CoreGraphics/CGBase.h>
+#import <CoreGraphics/CGBase.h>
 
 /**
- A C function that takes 1 argument (completion percentage) of type CGFloat (in range 0.0 <= p <= 1.0) and returns a CGFloat.
+ A block that takes 1 argument (completion percentage) of type CGFloat (in range 0.0 <= p <= 1.0) and returns a CGFloat.
  When the completion percentage argument is 0.0, the returned progress is typically also 0.0; similarly, when the completion percentage
  argument is 1.0, the returned progress is typically also 1.0. For completion percentage values in between 0.0 and 1.0, the returned
  progress may be any number (not necessarily confined to the range of 0.0 to 1.0).
  */
-typedef CGFloat (*INTUEasingFunction)(CGFloat);
+typedef CGFloat (^INTUEasingFunction)(CGFloat);
 
 // Linear interpolation (no easing)
-CGFloat INTULinear(CGFloat p);
+extern INTUEasingFunction INTULinear;
 
 // Sine wave easing; sin(p * PI/2)
-CGFloat INTUEaseInSine(CGFloat p);
-CGFloat INTUEaseOutSine(CGFloat p);
-CGFloat INTUEaseInOutSine(CGFloat p);
+extern INTUEasingFunction INTUEaseInSine;
+extern INTUEasingFunction INTUEaseOutSine;
+extern INTUEasingFunction INTUEaseInOutSine;
 
 // Quadratic easing; p^2
-CGFloat INTUEaseInQuadratic(CGFloat p);
-CGFloat INTUEaseOutQuadratic(CGFloat p);
-CGFloat INTUEaseInOutQuadratic(CGFloat p);
+extern INTUEasingFunction INTUEaseInQuadratic;
+extern INTUEasingFunction INTUEaseOutQuadratic;
+extern INTUEasingFunction INTUEaseInOutQuadratic;
 
 // Cubic easing; p^3
-CGFloat INTUEaseInCubic(CGFloat p);
-CGFloat INTUEaseOutCubic(CGFloat p);
-CGFloat INTUEaseInOutCubic(CGFloat p);
+extern INTUEasingFunction INTUEaseInCubic;
+extern INTUEasingFunction INTUEaseOutCubic;
+extern INTUEasingFunction INTUEaseInOutCubic;
 
 // Quartic easing; p^4
-CGFloat INTUEaseInQuartic(CGFloat p);
-CGFloat INTUEaseOutQuartic(CGFloat p);
-CGFloat INTUEaseInOutQuartic(CGFloat p);
+extern INTUEasingFunction INTUEaseInQuartic;
+extern INTUEasingFunction INTUEaseOutQuartic;
+extern INTUEasingFunction INTUEaseInOutQuartic;
 
 // Quintic easing; p^5
-CGFloat INTUEaseInQuintic(CGFloat p);
-CGFloat INTUEaseOutQuintic(CGFloat p);
-CGFloat INTUEaseInOutQuintic(CGFloat p);
+extern INTUEasingFunction INTUEaseInQuintic;
+extern INTUEasingFunction INTUEaseOutQuintic;
+extern INTUEasingFunction INTUEaseInOutQuintic;
 
 // Exponential easing, base 2
-CGFloat INTUEaseInExponential(CGFloat p);
-CGFloat INTUEaseOutExponential(CGFloat p);
-CGFloat INTUEaseInOutExponential(CGFloat p);
+extern INTUEasingFunction INTUEaseInExponential;
+extern INTUEasingFunction INTUEaseOutExponential;
+extern INTUEasingFunction INTUEaseInOutExponential;
 
 // Circular easing; sqrt(1 - p^2)
-CGFloat INTUEaseInCircular(CGFloat p);
-CGFloat INTUEaseOutCircular(CGFloat p);
-CGFloat INTUEaseInOutCircular(CGFloat p);
+extern INTUEasingFunction INTUEaseInCircular;
+extern INTUEasingFunction INTUEaseOutCircular;
+extern INTUEasingFunction INTUEaseInOutCircular;
 
 // Overshooting cubic easing;
-CGFloat INTUEaseInBack(CGFloat p);
-CGFloat INTUEaseOutBack(CGFloat p);
-CGFloat INTUEaseInOutBack(CGFloat p);
+extern INTUEasingFunction INTUEaseInBack;
+extern INTUEasingFunction INTUEaseOutBack;
+extern INTUEasingFunction INTUEaseInOutBack;
 
 // Exponentially-damped sine wave easing
-CGFloat INTUEaseInElastic(CGFloat p);
-CGFloat INTUEaseOutElastic(CGFloat p);
-CGFloat INTUEaseInOutElastic(CGFloat p);
+extern INTUEasingFunction INTUEaseInElastic;
+extern INTUEasingFunction INTUEaseOutElastic;
+extern INTUEasingFunction INTUEaseInOutElastic;
 
 // Exponentially-decaying bounce easing
-CGFloat INTUEaseInBounce(CGFloat p);
-CGFloat INTUEaseOutBounce(CGFloat p);
-CGFloat INTUEaseInOutBounce(CGFloat p);
+extern INTUEasingFunction INTUEaseInBounce;
+extern INTUEasingFunction INTUEaseOutBounce;
+extern INTUEasingFunction INTUEaseInOutBounce;
 
 #endif /* INTU_EASING_FUNCTIONS_H */

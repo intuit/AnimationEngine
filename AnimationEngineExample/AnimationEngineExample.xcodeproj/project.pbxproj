@@ -15,8 +15,8 @@
 		B176B40C19C5065300D3BA31 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B176B40A19C5065300D3BA31 /* LaunchScreen.xib */; };
 		B176B42819C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */; };
 		B176B42919C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */; };
-		B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.c */; };
-		B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.c */; };
+		B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */; };
+		B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */; };
 		B176B42C19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */; };
 		B176B42D19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */; };
 		B176B42F19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42E19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m */; };
@@ -47,7 +47,7 @@
 		B176B41619C5065300D3BA31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B176B42219C506CA00D3BA31 /* INTUAnimationEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUAnimationEngine.h; path = ../../Source/INTUAnimationEngine.h; sourceTree = "<group>"; };
 		B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUAnimationEngine.m; path = ../../Source/INTUAnimationEngine.m; sourceTree = "<group>"; };
-		B176B42419C506CB00D3BA31 /* INTUEasingFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = INTUEasingFunctions.c; path = ../../Source/INTUEasingFunctions.c; sourceTree = "<group>"; };
+		B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUEasingFunctions.m; path = ../../Source/INTUEasingFunctions.m; sourceTree = "<group>"; };
 		B176B42519C506CB00D3BA31 /* INTUEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUEasingFunctions.h; path = ../../Source/INTUEasingFunctions.h; sourceTree = "<group>"; };
 		B176B42619C506CB00D3BA31 /* INTUInterpolationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUInterpolationFunctions.h; path = ../../Source/INTUInterpolationFunctions.h; sourceTree = "<group>"; };
 		B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUInterpolationFunctions.m; path = ../../Source/INTUInterpolationFunctions.m; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				B176B42219C506CA00D3BA31 /* INTUAnimationEngine.h */,
 				B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */,
 				B176B42519C506CB00D3BA31 /* INTUEasingFunctions.h */,
-				B176B42419C506CB00D3BA31 /* INTUEasingFunctions.c */,
+				B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */,
 				B176B42619C506CB00D3BA31 /* INTUInterpolationFunctions.h */,
 				B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */,
 			);
@@ -250,7 +250,7 @@
 				B176B40419C5065300D3BA31 /* ViewController.m in Sources */,
 				B176B40119C5065300D3BA31 /* AppDelegate.m in Sources */,
 				B176B42819C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */,
-				B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.c in Sources */,
+				B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */,
 				B176B3FE19C5065300D3BA31 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +262,7 @@
 				B176B42D19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */,
 				B176B42919C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */,
 				B176B42F19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m in Sources */,
-				B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.c in Sources */,
+				B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
