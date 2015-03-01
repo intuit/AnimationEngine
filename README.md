@@ -15,16 +15,16 @@ INTUAnimationEngine includes an extensive library of easing functions that can b
     	pod 'INTUAnimationEngine'
 
 2.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
-3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
+3.	Import the `INTUAnimationEngine.h` header. Typically, this should be written as `#import <INTUAnimationEngine/INTUAnimationEngine.h>`.
 
 **Manually from GitHub**
 
 1.	Download all the files in the [Source directory](Source).
 2.	Add all the files to your Xcode project (drag and drop is easiest).
-3.	`#import "INTUAnimationEngine.h"` wherever you want to use it.
+3.	Import the `INTUAnimationEngine.h` header.
 
 ## Usage
-The major difference between INTUAnimationEngine and the UIView animation methods is how the `animations` block works. With the UIView methods, the `animations` block is only executed once, and the changes made to views within this block represent the new state at the end of the animation.
+The primary difference between INTUAnimationEngine and the UIView animation methods is how the `animations` block works. With the UIView methods, the `animations` block is only executed once, and the changes made to views within this block represent the new state at the end of the animation.
 
 With INTUAnimationEngine, the `animations` block is called many times during the animation (once per frame), and each time it is called, your code should update the state of views based upon the current value of the `percentage` or `progress` passed into the block. Typically, you'll want to use one of the interpolation functions included in this library to help generate all the intermediate values between the start and end states for a given property.
 
