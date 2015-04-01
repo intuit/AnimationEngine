@@ -36,6 +36,7 @@
 
 @property (nonatomic, readonly) INTUAnimationID animationID;
 
+// These properties correspond directly to the parameters when creating a new animation with INTUAnimationEngine.
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) NSTimeInterval delay;
 @property (nonatomic, assign) INTUEasingFunction easingFunction;
@@ -46,9 +47,12 @@
 
 @property (nonatomic, assign) CFTimeInterval startTime;
 
+/** Computed. Calculated based on animation start time, delay, and duration. */
+@property (nonatomic, readonly) CGFloat percentComplete;
+/** Computed. If no easing function, same as percentComplete; otherwise returns percentComplete transformed by easingFunction. */
+@property (nonatomic, readonly) CGFloat progress;
+
 - (void)applyOptions:(INTUAnimationOptions)options;
-- (CGFloat)percentComplete;
-- (CGFloat)progress;
 - (void)tick;
 - (void)complete:(BOOL)finished;
 
@@ -63,6 +67,7 @@ static INTUAnimationID _nextAnimationID = 0;
  */
 + (INTUAnimationID)getNextAnimationID
 {
+    NSAssert([NSThread isMainThread], @"INTUAnimationEngine should only be called from the main thread.");
     _nextAnimationID++;
     return _nextAnimationID;
 }
@@ -76,6 +81,9 @@ static INTUAnimationID _nextAnimationID = 0;
     return self;
 }
 
+/**
+ Applies the given mask of options to this animation, setting the corresponding properties as needed.
+ */
 - (void)applyOptions:(INTUAnimationOptions)options
 {
     self.repeat = options & INTUAnimationOptionRepeat;
@@ -109,12 +117,16 @@ static INTUAnimationID _nextAnimationID = 0;
 }
 
 /**
- The progress of this animation, incorporating the easing function.
+ The progress of this animation, incorporating the easing function. If there is no easing function, the progress is the same as percentComplete.
  The range is not confined to any bounds (may exceed 1.0 or go below 0.0).
  */
 - (CGFloat)progress
 {
-    return self.easingFunction([self percentComplete]);
+    if (self.easingFunction) {
+        return self.easingFunction(self.percentComplete);
+    } else {
+        return self.percentComplete;
+    }
 }
 
 /**
@@ -127,11 +139,7 @@ static INTUAnimationID _nextAnimationID = 0;
     }
     
     if (self.animations) {
-        if (self.easingFunction) {
-            self.animations([self progress]);
-        } else {
-            self.animations([self percentComplete]);
-        }
+        self.animations(self.progress);
     }
 }
 
@@ -178,13 +186,11 @@ static id _sharedInstance;
                             animations:(void (^)(CGFloat percentage))animations
                             completion:(void (^)(BOOL finished))completion
 {
-    INTUAnimation *animation = [INTUAnimation new];
-    animation.duration = duration;
-    animation.delay = delay;
-    animation.animations = animations;
-    animation.completion = completion;
-    [[self sharedInstance] addAnimation:animation];
-    return animation.animationID;
+    return [self animateWithDuration:duration
+                               delay:delay
+                              easing:nil
+                          animations:animations
+                          completion:completion];
 }
 
 + (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
@@ -224,6 +230,7 @@ static id _sharedInstance;
  */
 + (void)cancelAnimationWithID:(INTUAnimationID)animationID
 {
+    NSAssert([NSThread isMainThread], @"INTUAnimationEngine should only be called from the main thread.");
     [[self sharedInstance] removeAnimationWithID:animationID didFinish:NO];
 }
 
@@ -234,19 +241,19 @@ static id _sharedInstance;
         _activeAnimations = [NSMutableDictionary new];
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tickActiveAnimations)];
         _displayLink.paused = YES;
-        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes]; // NSRunLoopCommonModes will cause the display link to fire even during scroll view scrolling, etc
     }
     return self;
 }
 
 /**
- Callback when the CADisplayLink fires a notification.
+ Callback when the CADisplayLink fires.
  */
 - (void)tickActiveAnimations
 {
     NSMutableArray *finishedAnimationIDs = [NSMutableArray new];
     for (INTUAnimation *animation in [self.activeAnimations objectEnumerator]) {
-        if (animation.repeat == NO && [animation percentComplete] >= 1.0) {
+        if (animation.repeat == NO && animation.percentComplete >= 1.0) {
             [finishedAnimationIDs addObject:@(animation.animationID)];
         }
         [animation tick];

@@ -98,8 +98,8 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
                                                          self.demoLabel.center = INTUInterpolateCGPoint(self.startCenter, self.endCenter, progress);
                                                          self.demoLabel.layer.cornerRadius = INTUInterpolateCGFloat(self.startCornerRadius, self.endCornerRadius, progress);
                                                          self.demoLabel.backgroundColor = INTUInterpolate(self.startColor, self.endColor, progress);
-                                                         CGFloat rotation = INTUInterpolateCGFloat(self.startRotation, self.endRotation, progress);
-                                                         self.demoLabel.transform = CGAffineTransformMakeRotation(rotation);
+                                                         CGFloat rotationAngle = INTUInterpolateCGFloat(self.startRotation, self.endRotation, progress);
+                                                         self.demoLabel.transform = CGAffineTransformMakeRotation(rotationAngle);
                                                          self.demoLabel.textAlignment = [INTUInterpolateDiscreteValues(self.textAlignmentValues, progress) integerValue];
                                                          
                                                          self.progressLabel.text = [NSString stringWithFormat:@"Progress: %.2f", progress];
@@ -107,6 +107,8 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
                                                      completion:^(BOOL finished) {
                                                          // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is cancelled.
                                                          self.progressLabel.text = finished ? @"Animation Completed" : @"Animation Cancelled";
+                                                         self.animationID = NSNotFound;
+                                                         [self.toggleButton setTitle:@"Restart Animation" forState:UIControlStateNormal];
                                                      }];
     
     [self.toggleButton setTitle:@"Cancel Animation" forState:UIControlStateNormal];
@@ -115,9 +117,6 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
 - (void)stopAnimation
 {
     [INTUAnimationEngine cancelAnimationWithID:self.animationID];
-    self.animationID = NSNotFound;
-    
-    [self.toggleButton setTitle:@"Restart Animation" forState:UIControlStateNormal];
 }
 
 /**

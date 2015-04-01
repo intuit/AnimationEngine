@@ -39,7 +39,7 @@ typedef NSInteger INTUAnimationID;
 typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
     /** Default, no options. */
     INTUAnimationOptionNone         = 0,
-    /** Repeat animation indefinitely until cancelled. Note: completion block will only be executed if animation is cancelled. */
+    /** Repeat animation indefinitely until canceled. Note: completion block will only be executed if animation is canceled. */
     INTUAnimationOptionRepeat       = 1 << 0,
     /** If repeat, run animation forwards and backwards. */
     INTUAnimationOptionAutoreverse  = 1 << 1
@@ -62,7 +62,7 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  @param animations  A block which is executed at each display frame with the current animation percentage complete. This percentage value should
                     be used to update views so that they can be rendered onscreen in the next frame with this updated state.
  @param completion  A block which is executed at the completion of the animation, with the finished parameter indicating whether the animation
-                    completed without interruption (or was cancelled).
+                    completed without interruption (or was canceled).
  
  @return A unique INTUAnimationID for this animation. Can be used to cancel the animation at a later point in time.
  */
@@ -81,7 +81,7 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  @param animations      A block which is executed at each display frame with the current animation progress. This progress value should be used to
                         update views so that they can be rendered onscreen in the next frame with this updated state.
  @param completion      A block which is executed at the completion of the animation, with the finished parameter indicating whether the animation
-                        completed without interruption (or was cancelled).
+                        completed without interruption (or was canceled).
  
  @return A unique INTUAnimationID for this animation. Can be used to cancel the animation at a later point in time.
  */
@@ -102,7 +102,7 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  @param animations      A block which is executed at each display frame with the current animation progress. This progress value should be used to
                         update views so that they can be rendered onscreen in the next frame with this updated state.
  @param completion      A block which is executed at the completion of the animation, with the finished parameter indicating whether the animation
-                        completed without interruption (or was cancelled).
+                        completed without interruption (or was canceled).
  
  @return A unique INTUAnimationID for this animation. Can be used to cancel the animation at a later point in time.
  */
