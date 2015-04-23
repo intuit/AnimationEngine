@@ -4,3 +4,7 @@ xcode_project: AnimationEngineExample/AnimationEngineExample.xcodeproj
 xcode_scheme: AnimationEngineExample
 xcode_sdk: iphonesimulator
 
+before_install:
+  - gem install slather --no-ri --no-rdoc
+
+after_success: slather
