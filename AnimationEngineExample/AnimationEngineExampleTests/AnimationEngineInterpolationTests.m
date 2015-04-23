@@ -28,6 +28,9 @@
 #import <XCTest/XCTest.h>
 #import "INTUInterpolationFunctions.h"
 
+#define EPSILON                                     0.001  // the allowable delta between the expected result and the actual result (due to the imprecise nature of floating point numbers)
+#define ROUNDED_EQUALS(a, b)                        (fabs((a) - (b)) < EPSILON)
+
 @interface AnimationEngineInterpolationTests : XCTestCase
 
 @end
@@ -87,12 +90,12 @@
 
 - (void)testInterpolateCGFloat
 {
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, 0.0) == 50.0);
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, 1.0) == 100.0);
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, 0.5) == 75.0);
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, 0.2) == 60.0);
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, -0.2) == 40.0);
-    XCTAssert(INTUInterpolateCGFloat(50.0, 100.0, 1.2) == 110.0);
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, 0.0), 50.0));
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, 1.0), 100.0));
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, 0.5), 75.0));
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, 0.2), 60.0));
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, -0.2), 40.0));
+    XCTAssert(ROUNDED_EQUALS(INTUInterpolateCGFloat(50.0, 100.0, 1.2), 110.0));
 }
 
 - (void)testInterpolate
