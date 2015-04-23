@@ -1,4 +1,6 @@
 sudo: false
 language: objective-c
 xcode_project: AnimationEngineExample/AnimationEngineExample.xcodeproj
+xcode_sdk: iphonesimulator
+xcode_scheme: AnimationEngineExample
 
