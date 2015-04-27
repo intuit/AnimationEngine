@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B12DD4811AEC693B007CD42C /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD47C1AEC693B007CD42C /* INTUAnimationEngine.m */; };
+		B12DD4821AEC693B007CD42C /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD47C1AEC693B007CD42C /* INTUAnimationEngine.m */; };
+		B12DD4831AEC693B007CD42C /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD47E1AEC693B007CD42C /* INTUEasingFunctions.m */; };
+		B12DD4841AEC693B007CD42C /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD47E1AEC693B007CD42C /* INTUEasingFunctions.m */; };
+		B12DD4851AEC693B007CD42C /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD4801AEC693B007CD42C /* INTUInterpolationFunctions.m */; };
+		B12DD4861AEC693B007CD42C /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD4801AEC693B007CD42C /* INTUInterpolationFunctions.m */; };
+		B12DD48B1AEC6966007CD42C /* INTUSpringSolver.c in Sources */ = {isa = PBXBuildFile; fileRef = B12DD4881AEC6966007CD42C /* INTUSpringSolver.c */; };
+		B12DD48C1AEC6966007CD42C /* INTUSpringSolver.c in Sources */ = {isa = PBXBuildFile; fileRef = B12DD4881AEC6966007CD42C /* INTUSpringSolver.c */; };
+		B12DD48F1AED9BCD007CD42C /* SpringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DD48E1AED9BCD007CD42C /* SpringViewController.m */; };
 		B176B3FE19C5065300D3BA31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B3FD19C5065300D3BA31 /* main.m */; };
 		B176B40119C5065300D3BA31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B40019C5065300D3BA31 /* AppDelegate.m */; };
-		B176B40419C5065300D3BA31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B40319C5065300D3BA31 /* ViewController.m */; };
+		B176B40419C5065300D3BA31 /* RegularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B40319C5065300D3BA31 /* RegularViewController.m */; };
 		B176B40719C5065300D3BA31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B176B40519C5065300D3BA31 /* Main.storyboard */; };
 		B176B40919C5065300D3BA31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B176B40819C5065300D3BA31 /* Images.xcassets */; };
 		B176B40C19C5065300D3BA31 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B176B40A19C5065300D3BA31 /* LaunchScreen.xib */; };
-		B176B42819C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */; };
-		B176B42919C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */; };
-		B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */; };
-		B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */; };
-		B176B42C19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */; };
-		B176B42D19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */; };
 		B176B42F19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B176B42E19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m */; };
 /* End PBXBuildFile section */
 
@@ -33,24 +36,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B12DD47B1AEC693B007CD42C /* INTUAnimationEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUAnimationEngine.h; path = ../../INTUAnimationEngine/INTUAnimationEngine.h; sourceTree = "<group>"; };
+		B12DD47C1AEC693B007CD42C /* INTUAnimationEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUAnimationEngine.m; path = ../../INTUAnimationEngine/INTUAnimationEngine.m; sourceTree = "<group>"; };
+		B12DD47D1AEC693B007CD42C /* INTUEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUEasingFunctions.h; path = ../../INTUAnimationEngine/INTUEasingFunctions.h; sourceTree = "<group>"; };
+		B12DD47E1AEC693B007CD42C /* INTUEasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUEasingFunctions.m; path = ../../INTUAnimationEngine/INTUEasingFunctions.m; sourceTree = "<group>"; };
+		B12DD47F1AEC693B007CD42C /* INTUInterpolationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUInterpolationFunctions.h; path = ../../INTUAnimationEngine/INTUInterpolationFunctions.h; sourceTree = "<group>"; };
+		B12DD4801AEC693B007CD42C /* INTUInterpolationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUInterpolationFunctions.m; path = ../../INTUAnimationEngine/INTUInterpolationFunctions.m; sourceTree = "<group>"; };
+		B12DD4881AEC6966007CD42C /* INTUSpringSolver.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = INTUSpringSolver.c; path = ../../INTUAnimationEngine/SpringSolver/INTUSpringSolver.c; sourceTree = "<group>"; };
+		B12DD4891AEC6966007CD42C /* INTUSpringSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUSpringSolver.h; path = ../../INTUAnimationEngine/SpringSolver/INTUSpringSolver.h; sourceTree = "<group>"; };
+		B12DD48A1AEC6966007CD42C /* INTUVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUVector.h; path = ../../INTUAnimationEngine/SpringSolver/INTUVector.h; sourceTree = "<group>"; };
+		B12DD48D1AED9BCD007CD42C /* SpringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpringViewController.h; sourceTree = "<group>"; };
+		B12DD48E1AED9BCD007CD42C /* SpringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpringViewController.m; sourceTree = "<group>"; };
 		B176B3F819C5065300D3BA31 /* AnimationEngineExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimationEngineExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B176B3FC19C5065300D3BA31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B176B3FD19C5065300D3BA31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B176B3FF19C5065300D3BA31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B176B40019C5065300D3BA31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B176B40219C5065300D3BA31 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B176B40319C5065300D3BA31 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B176B40219C5065300D3BA31 /* RegularViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegularViewController.h; sourceTree = "<group>"; };
+		B176B40319C5065300D3BA31 /* RegularViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegularViewController.m; sourceTree = "<group>"; };
 		B176B40619C5065300D3BA31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B176B40819C5065300D3BA31 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B176B40B19C5065300D3BA31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B176B41119C5065300D3BA31 /* AnimationEngineExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimationEngineExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B176B41619C5065300D3BA31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B176B42219C506CA00D3BA31 /* INTUAnimationEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUAnimationEngine.h; path = ../../Source/INTUAnimationEngine.h; sourceTree = "<group>"; };
-		B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUAnimationEngine.m; path = ../../Source/INTUAnimationEngine.m; sourceTree = "<group>"; };
-		B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUEasingFunctions.m; path = ../../Source/INTUEasingFunctions.m; sourceTree = "<group>"; };
-		B176B42519C506CB00D3BA31 /* INTUEasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUEasingFunctions.h; path = ../../Source/INTUEasingFunctions.h; sourceTree = "<group>"; };
-		B176B42619C506CB00D3BA31 /* INTUInterpolationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INTUInterpolationFunctions.h; path = ../../Source/INTUInterpolationFunctions.h; sourceTree = "<group>"; };
-		B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INTUInterpolationFunctions.m; path = ../../Source/INTUInterpolationFunctions.m; sourceTree = "<group>"; };
 		B176B42E19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationEngineInterpolationTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +80,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B12DD4871AEC6953007CD42C /* SpringSolver */ = {
+			isa = PBXGroup;
+			children = (
+				B12DD4891AEC6966007CD42C /* INTUSpringSolver.h */,
+				B12DD4881AEC6966007CD42C /* INTUSpringSolver.c */,
+				B12DD48A1AEC6966007CD42C /* INTUVector.h */,
+			);
+			name = SpringSolver;
+			sourceTree = "<group>";
+		};
 		B176B3EF19C5065300D3BA31 = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +114,10 @@
 			children = (
 				B176B3FF19C5065300D3BA31 /* AppDelegate.h */,
 				B176B40019C5065300D3BA31 /* AppDelegate.m */,
-				B176B40219C5065300D3BA31 /* ViewController.h */,
-				B176B40319C5065300D3BA31 /* ViewController.m */,
+				B176B40219C5065300D3BA31 /* RegularViewController.h */,
+				B176B40319C5065300D3BA31 /* RegularViewController.m */,
+				B12DD48D1AED9BCD007CD42C /* SpringViewController.h */,
+				B12DD48E1AED9BCD007CD42C /* SpringViewController.m */,
 				B176B40519C5065300D3BA31 /* Main.storyboard */,
 				B176B40819C5065300D3BA31 /* Images.xcassets */,
 				B176B40A19C5065300D3BA31 /* LaunchScreen.xib */,
@@ -135,12 +155,13 @@
 		B176B42119C506B200D3BA31 /* INTUAnimationEngine */ = {
 			isa = PBXGroup;
 			children = (
-				B176B42219C506CA00D3BA31 /* INTUAnimationEngine.h */,
-				B176B42319C506CA00D3BA31 /* INTUAnimationEngine.m */,
-				B176B42519C506CB00D3BA31 /* INTUEasingFunctions.h */,
-				B176B42419C506CB00D3BA31 /* INTUEasingFunctions.m */,
-				B176B42619C506CB00D3BA31 /* INTUInterpolationFunctions.h */,
-				B176B42719C506CB00D3BA31 /* INTUInterpolationFunctions.m */,
+				B12DD47B1AEC693B007CD42C /* INTUAnimationEngine.h */,
+				B12DD47C1AEC693B007CD42C /* INTUAnimationEngine.m */,
+				B12DD47D1AEC693B007CD42C /* INTUEasingFunctions.h */,
+				B12DD47E1AEC693B007CD42C /* INTUEasingFunctions.m */,
+				B12DD47F1AEC693B007CD42C /* INTUInterpolationFunctions.h */,
+				B12DD4801AEC693B007CD42C /* INTUInterpolationFunctions.m */,
+				B12DD4871AEC6953007CD42C /* SpringSolver */,
 			);
 			name = INTUAnimationEngine;
 			path = AnimationEngineExample;
@@ -246,11 +267,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B176B42C19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */,
-				B176B40419C5065300D3BA31 /* ViewController.m in Sources */,
+				B176B40419C5065300D3BA31 /* RegularViewController.m in Sources */,
+				B12DD4831AEC693B007CD42C /* INTUEasingFunctions.m in Sources */,
+				B12DD48B1AEC6966007CD42C /* INTUSpringSolver.c in Sources */,
+				B12DD48F1AED9BCD007CD42C /* SpringViewController.m in Sources */,
+				B12DD4851AEC693B007CD42C /* INTUInterpolationFunctions.m in Sources */,
 				B176B40119C5065300D3BA31 /* AppDelegate.m in Sources */,
-				B176B42819C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */,
-				B176B42A19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */,
+				B12DD4811AEC693B007CD42C /* INTUAnimationEngine.m in Sources */,
 				B176B3FE19C5065300D3BA31 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,10 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B176B42D19C506CB00D3BA31 /* INTUInterpolationFunctions.m in Sources */,
-				B176B42919C506CB00D3BA31 /* INTUAnimationEngine.m in Sources */,
+				B12DD4841AEC693B007CD42C /* INTUEasingFunctions.m in Sources */,
+				B12DD4821AEC693B007CD42C /* INTUAnimationEngine.m in Sources */,
 				B176B42F19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m in Sources */,
-				B176B42B19C506CB00D3BA31 /* INTUEasingFunctions.m in Sources */,
+				B12DD4861AEC693B007CD42C /* INTUInterpolationFunctions.m in Sources */,
+				B12DD48C1AEC6966007CD42C /* INTUSpringSolver.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

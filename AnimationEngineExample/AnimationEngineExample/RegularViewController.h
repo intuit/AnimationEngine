@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RegularViewController.h
 //  AnimationEngineExample
 //
 //  Copyright (c) 2014 Intuit Inc.
@@ -26,6 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface RegularViewController : UIViewController
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  RegularViewController.m
 //  AnimationEngineExample
 //
 //  Copyright (c) 2014 Intuit Inc.
@@ -24,18 +24,19 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "ViewController.h"
+#import "RegularViewController.h"
 #import "INTUAnimationEngine.h"
 
 static const CGFloat kAnimationDuration = 2.0; // in seconds
 
-@interface ViewController ()
+@interface RegularViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *demoLabel; // the view that is animated in the demo
+@property (nonatomic, weak) IBOutlet UILabel *demoLabel; // the view that is animated in the demo
 
-@property (weak, nonatomic) IBOutlet UIButton *toggleButton; // control to cancel/restart animation
-@property (weak, nonatomic) IBOutlet UILabel *progressLabel; // displays the current progress
+@property (nonatomic, weak) IBOutlet UIButton *toggleButton; // control to cancel/restart animation
+@property (nonatomic, weak) IBOutlet UILabel *progressLabel; // displays the current progress
 
+// Stores the Animation ID for the currently running animation, or NSNotFound if no animation is currently running.
 @property (nonatomic, assign) INTUAnimationID animationID;
 
 
@@ -55,13 +56,15 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
 
 @end
 
-@implementation ViewController
+@implementation RegularViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.demoLabel.clipsToBounds = YES; // required for the cornerRadius animation to work
+    
+    self.animationID = NSNotFound;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -85,7 +88,9 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
     // NSTextAlignment can't be linearly interpolated because it is a few discrete values
     self.textAlignmentValues = @[@(NSTextAlignmentLeft), @(NSTextAlignmentCenter), @(NSTextAlignmentRight)];
     
-    [self startAnimation];
+    if (self.animationID == NSNotFound) {
+        [self startAnimation];
+    }
 }
 
 - (void)startAnimation
@@ -105,8 +110,8 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
                                                          self.progressLabel.text = [NSString stringWithFormat:@"Progress: %.2f", progress];
                                                      }
                                                      completion:^(BOOL finished) {
-                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is cancelled.
-                                                         self.progressLabel.text = finished ? @"Animation Completed" : @"Animation Cancelled";
+                                                         // NOTE: When passing INTUAnimationOptionRepeat, this completion block is NOT executed at the end of each cycle. It will only run if the animation is canceled.
+                                                         self.progressLabel.text = finished ? @"Animation Completed" : @"Animation Canceled";
                                                          self.animationID = NSNotFound;
                                                          [self.toggleButton setTitle:@"Restart Animation" forState:UIControlStateNormal];
                                                      }];
@@ -119,9 +124,7 @@ static const CGFloat kAnimationDuration = 2.0; // in seconds
     [INTUAnimationEngine cancelAnimationWithID:self.animationID];
 }
 
-/**
- Callback when the "Start Animation"/"Cancel Animation" button is tapped.
- */
+/** Callback when the "Start Animation"/"Cancel Animation" button is tapped. */
 - (IBAction)toggleAnimation:(UIButton *)sender
 {
     if (self.animationID == NSNotFound) {
