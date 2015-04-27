@@ -25,6 +25,7 @@
 
 #import "INTUAnimationEngine.h"
 #import <QuartzCore/QuartzCore.h>
+#include "INTUSpringSolver.h"
 
 
 #pragma mark - INTUAnimation
@@ -105,7 +106,7 @@ static INTUAnimationID _nextAnimationID = 0;
  */
 - (CGFloat)percentComplete
 {
-    CGFloat percent = ((CACurrentMediaTime() - self.startTime) - self.delay) / self.duration;
+    CGFloat percent = (CACurrentMediaTime() - self.startTime - self.delay) / self.duration;
     if (self.repeat) {
         NSUInteger repeatCount = (NSUInteger)percent;
         percent = percent - repeatCount;
@@ -151,6 +152,68 @@ static INTUAnimationID _nextAnimationID = 0;
     if (self.completion) {
         self.completion(finished);
     }
+}
+
+@end
+
+
+#pragma mark - INTUSpringAnimation
+
+@interface INTUSpringAnimation : INTUAnimation
+
+@property (nonatomic, assign) CGFloat damping;
+@property (nonatomic, assign) CGFloat stiffness;
+@property (nonatomic, assign) CGFloat mass;
+
+@property (nonatomic, readonly) BOOL hasConverged;
+
+// Note: This spring solver context ref is not managed by ARC. It must be destroyed and set to nil in -[dealloc] to avoid a memory leak.
+@property (nonatomic, assign) INTUSpringSolverContextRef context;
+
+@end
+
+@implementation INTUSpringAnimation
+
+- (BOOL)hasConverged
+{
+    if (self.context && INTUSpringSolverHasConverged(self.context)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (CGFloat)progress
+{
+    // Start the mass "pulled back" to -1.0 so that the spring pulls it towards the solver's resting state (the zero position)
+    const double initialPosition[kINTUSpringSolverDimensions] = {-1.0};
+    const double initialVelocity[kINTUSpringSolverDimensions] = {0.0};
+    
+    if (!self.context) {
+        self.context = INTUSpringSolverContextCreate(self.stiffness, self.damping, self.mass, initialPosition, initialVelocity);
+    }
+    
+    double currentAnimationTime = CACurrentMediaTime() - self.startTime - self.delay;
+    INTUSpringState newState = INTUAdvanceSpringSolver(self.context, currentAnimationTime);
+    // Subtract the initial position from the spring's new position, as we're working inverted in the solver
+    return newState.position[0] - initialPosition[0];
+}
+
+- (void)tick
+{
+    if ([self remainingDelay] > FLT_EPSILON) {
+        return;
+    }
+    
+    if (self.animations) {
+        self.animations(self.progress);
+    }
+}
+
+- (void)dealloc
+{
+    INTUSpringSolverContextDestroy(_context);
+    _context = nil;
 }
 
 @end
@@ -225,6 +288,24 @@ static id _sharedInstance;
     return animation.animationID;
 }
 
++ (INTUAnimationID)animateWithDamping:(CGFloat)damping
+                            stiffness:(CGFloat)stiffness
+                                 mass:(CGFloat)mass
+                                delay:(NSTimeInterval)delay
+                           animations:(void (^)(CGFloat progress))animations
+                           completion:(void (^)(BOOL finished))completion
+{
+    INTUSpringAnimation *animation = [INTUSpringAnimation new];
+    animation.damping = damping;
+    animation.stiffness = stiffness;
+    animation.mass = mass;
+    animation.delay = delay;
+    animation.animations = animations;
+    animation.completion = completion;
+    [[self sharedInstance] addAnimation:animation];
+    return animation.animationID;
+}
+
 /**
  Cancels the currently active animation with the given animation ID. The completion block for the animation will be executed, with the finished parameter equal to NO.
  */
@@ -253,7 +334,13 @@ static id _sharedInstance;
 {
     NSMutableArray *finishedAnimationIDs = [NSMutableArray new];
     for (INTUAnimation *animation in [self.activeAnimations objectEnumerator]) {
-        if (animation.repeat == NO && animation.percentComplete >= 1.0) {
+        if ([animation isKindOfClass:[INTUSpringAnimation class]]) {
+            INTUSpringAnimation *springAnimation = (INTUSpringAnimation *)animation;
+            if (springAnimation.hasConverged) {
+                [finishedAnimationIDs addObject:@(animation.animationID)];
+            }
+        }
+        else if (animation.repeat == NO && animation.percentComplete >= 1.0) {
             [finishedAnimationIDs addObject:@(animation.animationID)];
         }
         [animation tick];

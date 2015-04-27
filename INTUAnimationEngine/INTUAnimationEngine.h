@@ -114,6 +114,30 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
                             completion:(void (^)(BOOL finished))completion;
 
 /**
+ Executes a block of animations multiple times over a duration that is determined by the physics of a spring, passing in a progress value each
+ time to be used to drive the animation. The progress value is determined by simulating a spring-mass sytem with the given properties (damping,
+ stiffness, mass).
+ 
+ @param damping         The amount of friction. Must be greater than or equal to zero. If exactly zero, the harmonic motion will continue
+                        indefinitely. Typical range: 1.0 to 30.0
+ @param stiffness       The stiffness of the spring. Must be greater than zero. Typical range: 1.0 to 500.0
+ @param mass            The amount of mass being moved by the spring. Must be greater than zero. Typical range: 0.1 to 10.0
+ @param delay           The delay before starting the animation in seconds.
+ @param animations      A block which is executed at each display frame with the current animation progress. This progress value should be used to
+                        update views so that they can be rendered onscreen in the next frame with this updated state.
+ @param completion      A block which is executed at the completion of the animation, with the finished parameter indicating whether the animation
+                        completed without interruption (or was canceled).
+ 
+ @return A unique INTUAnimationID for this animation. Can be used to cancel the animation at a later point in time.
+ */
++ (INTUAnimationID)animateWithDamping:(CGFloat)damping
+                            stiffness:(CGFloat)stiffness
+                                 mass:(CGFloat)mass
+                                delay:(NSTimeInterval)delay
+                           animations:(void (^)(CGFloat progress))animations
+                           completion:(void (^)(BOOL finished))completion;
+
+/**
  Cancels the currently active animation with the given animation ID.
  The completion block for the animation will be executed, with the finished parameter equal to NO.
  If there is no active animation for the given ID, this method will do nothing.
