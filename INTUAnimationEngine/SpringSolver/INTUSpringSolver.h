@@ -90,8 +90,8 @@ void                        INTUSpringSolverContextDestroy(INTUSpringSolverConte
  Advances the spring solver to the new time by calculating and returning the new state of the spring.
  
  @param context A reference to the spring solver context.
- @param newTime The new time to advance the spring solver to. The new time must be greater than zero, and greater than the
-                time passed into the previous call to advance the spring solver.
+ @param newTime The new time (in seconds) to advance the spring solver to. The new time must be greater than zero,
+                and greater than the time passed into the previous call to advance the spring solver.
  
  @return The new state of the spring after advancing the solver.
  */
