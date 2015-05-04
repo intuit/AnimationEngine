@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name                  = "INTUAnimationEngine"
-  s.version               = "1.3.0"
+  s.version               = "1.3.1"
   s.homepage              = "https://github.com/intuit/AnimationEngine"
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
   s.author                = { "Tyler Fox" => "tyler_fox@intuit.com" }
-  s.source                = { :git => "https://github.com/intuit/AnimationEngine.git", :tag => "v1.3.0" }
+  s.source                = { :git => "https://github.com/intuit/AnimationEngine.git", :tag => "v1.3.1" }
   s.source_files          = 'INTUAnimationEngine/*.{h,m}'
   s.platform              = :ios
   s.ios.deployment_target = '5.0'
@@ -15,7 +15,9 @@ Pod::Spec.new do |s|
 
   INTUAnimationEngine provides a friendly interface to drive custom animations using a CADisplayLink, inspired by the UIView block-based animation API. It enables interactive animations (normally driven by user input, such as a pan or pinch gesture) to run automatically over a given duration. It can also be used to get a callback every frame of an animation.
 
-  INTUAnimationEngine includes an extensive library of easing functions that can be used to customize animation timing. A complete library of interpolation functions is also included to animate any type of value or property, including those that are not animatable by Core Animation.
+  INTUAnimationEngine includes an extensive library of easing functions that can be used to customize animation timing, as well as a complete library of interpolation functions to animate any type of value or property including those that are not animatable by Core Animation.
+ 
+  The project also includes a standalone spring physics library to simulate damped harmonic motion. This is used under the hood to power a spring animation API on INTUAnimationEngine that allows full control over the damping, stiffness, and mass parameters. Since the spring solver is a completely independent and generic library implemented in pure C, it can be used on its own for many other applications apart from animation.
   DESC
   
   s.subspec 'SpringSolver' do |ss|
