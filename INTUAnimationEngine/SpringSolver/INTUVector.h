@@ -35,55 +35,55 @@
 
 #include <math.h>
 
-static inline void zeroVector(int dim, double *components)
+static inline void zeroVector(int dimensions, double *components)
 {
-    for (int i = 0; i<dim; i++) {
+    for (int i = 0; i < dimensions; i++) {
         components[i] = 0.0;
     }
 }
 
-static inline void copyVector(int dimension, const double *input, double *output)
+static inline void copyVector(int dimensions, const double *input, double *output)
 {
-    for (int i = 0; i < dimension; i++) {
+    for (int i = 0; i < dimensions; i++) {
         output[i] = input[i];
     }
 }
 
-static inline void multiplyScalarWithVector(int dimension, double scalar, const double *input, double *output)
+static inline void multiplyScalarWithVector(int dimensions, double scalar, const double *input, double *output)
 {
-    for (int i = 0; i < dimension; i++) {
+    for (int i = 0; i < dimensions; i++) {
         output[i] = input[i] * scalar;
     }
 }
 
-static inline void addVectors(int dimension, const double *v1, const double *v2, double *output)
+static inline void addVectors(int dimensions, const double *v1, const double *v2, double *output)
 {
-    for (int i = 0; i < dimension; i++) {
+    for (int i = 0; i < dimensions; i++) {
         output[i] = v1[i] + v2[i];
     }
 }
 
-static inline void subVectors(int dimension, const double *v1, const double *v2, double *output)
+static inline void subVectors(int dimensions, const double *v1, const double *v2, double *output)
 {
-    for (int i = 0; i < dimension; i++) {
+    for (int i = 0; i < dimensions; i++) {
         output[i] = v1[i] - v2[i];
     }
 }
 
-static inline double squaredNorm(int dimension, const double *v)
+static inline double squaredNorm(int dimensions, const double *v)
 {
     double result = 0.0;
     
-    for (int i = 0; i < dimension; i++) {
+    for (int i = 0; i < dimensions; i++) {
         result += v[i] * v[i];
     }
     
     return result;
 }
 
-static inline double norm(int dimension, const double *v)
+static inline double norm(int dimensions, const double *v)
 {
-    return sqrt(squaredNorm(dimension, v));
+    return sqrt(squaredNorm(dimensions, v));
 }
 
 #endif /* INTUVector_h */
