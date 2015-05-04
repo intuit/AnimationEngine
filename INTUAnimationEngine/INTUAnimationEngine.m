@@ -295,6 +295,12 @@ static id _sharedInstance;
                            animations:(void (^)(CGFloat progress))animations
                            completion:(void (^)(BOOL finished))completion
 {
+    if (damping < 0.0 || stiffness <= 0.0 || mass <= 0.0) {
+        NSAssert(damping >= 0.0, @"INTUAnimationEngine damping must be greater than or equal to zero.");
+        NSAssert(stiffness > 0.0, @"INTUAnimationEngine stiffness must be greater than zero.");
+        NSAssert(mass > 0.0, @"INTUAnimationEngine mass must be greater than zero.");
+        return NSNotFound;
+    }
     INTUSpringAnimation *animation = [INTUSpringAnimation new];
     animation.damping = damping;
     animation.stiffness = stiffness;
