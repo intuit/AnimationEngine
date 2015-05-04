@@ -12,7 +12,7 @@ The project also includes a standalone spring physics library to simulate damped
 ## Installation
 *INTUAnimationEngine requires iOS 5.0 or later.*
 
-**Using [CocoaPods](http://cocoapods.org)**
+### Using [CocoaPods](http://cocoapods.org)
 
 1.	Add the pod `INTUAnimationEngine` to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html).
 
@@ -21,9 +21,16 @@ The project also includes a standalone spring physics library to simulate damped
 2.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
 3.	Import the `INTUAnimationEngine.h` header. Typically, this should be written as `#import <INTUAnimationEngine/INTUAnimationEngine.h>`.
 
-**Manually from GitHub**
+#### Installing the Spring Solver Library Only
+The Spring Solver used by INTUAnimationEngine is available as a standalone C library, where it can be used for other applications (including ones that are not related to animation). The Spring Solver has its own CocoaPods subspec so that it can be installed separately from the rest of the INTUAnimationEngine project. To install the Spring Solver only, add the following line to your Podfile:
 
-1.	Download all the files in the [INTUAnimationEngine directory](INTUAnimationEngine).
+    pod 'INTUAnimationEngine/SpringSolver'
+
+Note that installing INTUAnimationEngine using `pod INTUAnimationEngine` automatically includes the Spring Solver library as a dependency.
+
+### Manually from GitHub
+
+1.	Download the contents of the [INTUAnimationEngine directory](INTUAnimationEngine).
 2.	Add all the files to your Xcode project (drag and drop is easiest).
 3.	Import the `INTUAnimationEngine.h` header.
 
