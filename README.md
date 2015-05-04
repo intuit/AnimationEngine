@@ -26,7 +26,7 @@ The Spring Solver used by INTUAnimationEngine is available as a standalone C lib
 
     pod 'INTUAnimationEngine/SpringSolver'
 
-Note that installing INTUAnimationEngine using `pod INTUAnimationEngine` automatically includes the Spring Solver library as a dependency.
+Note that installing INTUAnimationEngine using `pod 'INTUAnimationEngine'` automatically includes the Spring Solver library as a dependency.
 
 ### Manually from GitHub
 
