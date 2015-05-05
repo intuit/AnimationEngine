@@ -35,14 +35,12 @@
 
 #include <stdbool.h>
 
-// The spring solver defaults to simulating a spring along a single dimension.
+// The spring solver defaults to simulating a spring in a single dimension.
 // To use more than one dimension, define the preprocessor macro INTU_SPRING_SOLVER_DIMENSIONS to the number of dimensions.
 #ifdef INTU_SPRING_SOLVER_DIMENSIONS
-/** The number of dimensions of the spring solver. */
-static const int kINTUSpringSolverDimensions = INTU_SPRING_SOLVER_DIMENSIONS;
+#   define kINTUSpringSolverDimensions     INTU_SPRING_SOLVER_DIMENSIONS
 #else
-/** The number of dimensions of the spring solver. */
-static const int kINTUSpringSolverDimensions = 1;
+#   define kINTUSpringSolverDimensions     1
 #endif
 
 /** A reference to a private struct that stores the internal state of the spring solver. */
