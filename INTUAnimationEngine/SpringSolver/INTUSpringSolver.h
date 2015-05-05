@@ -60,8 +60,10 @@ typedef struct INTUSpringState INTUSpringState;
  @param damping         The amount of friction. Must be greater than or equal to zero. If exactly zero, the harmonic motion will continue
                         indefinitely (solver will never converge). Typical range: 1.0 to 30.0
  @param mass            The amount of mass being moved by the spring. Must be greater than zero. Typical range: 0.1 to 10.0
- @param initialPosition The starting position of the mass attached to the spring. The spring always acts in the direction of the zero vector.
- @param initialVelocity The starting velocity of the mass attached to the spring.
+ @param initialPosition A vector representing the starting position of the mass attached to the spring. The spring always acts in the direction of the zero vector.
+                        The vector must be an array of n double values, where n is the number of dimensions of the spring solver (kINTUSpringSolverDimensions).
+ @param initialVelocity A vector representing the starting velocity of the mass attached to the spring.
+                        The vector must be an array of n double values, where n is the number of dimensions of the spring solver (kINTUSpringSolverDimensions).
  
  @return A reference to the fully initialized spring solver context.
  
