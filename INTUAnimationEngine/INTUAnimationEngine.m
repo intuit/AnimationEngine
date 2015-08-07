@@ -337,21 +337,17 @@ static id _sharedInstance;
  */
 - (void)tickActiveAnimations
 {
-    NSMutableArray *finishedAnimationIDs = [NSMutableArray new];
     for (INTUAnimation *animation in [self.activeAnimations objectEnumerator]) {
         if ([animation isKindOfClass:[INTUSpringAnimation class]]) {
             INTUSpringAnimation *springAnimation = (INTUSpringAnimation *)animation;
             if (springAnimation.hasConverged) {
-                [finishedAnimationIDs addObject:@(animation.animationID)];
+                [self removeAnimationWithID:animation.animationID didFinish:YES];
             }
         }
         else if (animation.repeat == NO && animation.percentComplete >= 1.0) {
-            [finishedAnimationIDs addObject:@(animation.animationID)];
+            [self removeAnimationWithID:animation.animationID didFinish:YES];
         }
         [animation tick];
-    }
-    for (NSNumber *animationID in finishedAnimationIDs) {
-        [self removeAnimationWithID:[animationID integerValue] didFinish:YES];
     }
 }
 
