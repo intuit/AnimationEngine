@@ -1,5 +1,6 @@
 //
 //  INTUEasingFunctions.m
+//  https://github.com/intuit/AnimationEngine
 //
 //  Copyright (c) 2014-2015 Intuit Inc.
 //

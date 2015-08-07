@@ -1,5 +1,6 @@
 //
 //  INTUSpringSolver.c
+//  https://github.com/intuit/AnimationEngine
 //
 //  Copyright (c) 2014 Facebook, Inc. All rights reserved.
 //  Copyright (c) 2015 Intuit Inc.
