@@ -24,12 +24,11 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#ifndef INTU_INTERPOLATION_FUNCTIONS_H
-#define INTU_INTERPOLATION_FUNCTIONS_H
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "INTUDefines.h"
 
+__INTU_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Proximal Interpolation Functions
 
@@ -74,4 +73,4 @@ CGColorRef INTUInterpolateCGColor(CGColorRef start, CGColorRef end, CGFloat prog
     be used. Otherwise, proximal interpolation will be used. */
 id INTUInterpolate(id start, id end, CGFloat progress);
 
-#endif /* INTU_INTERPOLATION_FUNCTIONS_H */
+__INTU_ASSUME_NONNULL_END

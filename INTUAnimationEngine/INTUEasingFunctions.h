@@ -24,9 +24,6 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#ifndef INTU_EASING_FUNCTIONS_H
-#define INTU_EASING_FUNCTIONS_H
-
 #import <CoreGraphics/CGBase.h>
 
 /**
@@ -89,5 +86,3 @@ extern INTUEasingFunction INTUEaseInOutElastic;
 extern INTUEasingFunction INTUEaseInBounce;
 extern INTUEasingFunction INTUEaseOutBounce;
 extern INTUEasingFunction INTUEaseInOutBounce;
-
-#endif /* INTU_EASING_FUNCTIONS_H */

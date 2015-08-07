@@ -124,7 +124,8 @@ UIColor * INTUInterpolateUIColor(UIColor *start, UIColor *end, CGFloat progress)
     }
     
     NSCAssert(false, @"Cannot interpolate between two UIColors in different color spaces.");
-    return nil;
+    // Fall back to proximal interpolation
+    return INTUInterpolateDiscrete(start, end, progress);
 }
 
 CGColorRef INTUInterpolateCGColor(CGColorRef start, CGColorRef end, CGFloat progress)

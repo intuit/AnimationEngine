@@ -25,9 +25,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "INTUDefines.h"
 #import "INTUEasingFunctions.h"
 #import "INTUInterpolationFunctions.h"
 
+__INTU_ASSUME_NONNULL_BEGIN
 
 /**
  A unique ID that corresponds to one animation.
@@ -69,8 +71,8 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  */
 + (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
                                  delay:(NSTimeInterval)delay
-                            animations:(void (^)(CGFloat percentage))animations
-                            completion:(void (^)(BOOL finished))completion;
+                            animations:(__INTU_NULLABLE void (^)(CGFloat percentage))animations
+                            completion:(__INTU_NULLABLE void (^)(BOOL finished))completion;
 
 /**
  Executes a block of animations multiple times over a given duration, passing in a progress value each time to be used to drive the animation.
@@ -88,9 +90,9 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  */
 + (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
                                  delay:(NSTimeInterval)delay
-                                easing:(INTUEasingFunction)easingFunction
-                            animations:(void (^)(CGFloat progress))animations
-                            completion:(void (^)(BOOL finished))completion;
+                                easing:(__INTU_NULLABLE INTUEasingFunction)easingFunction
+                            animations:(__INTU_NULLABLE void (^)(CGFloat progress))animations
+                            completion:(__INTU_NULLABLE void (^)(BOOL finished))completion;
 
 /**
  Executes a block of animations multiple times over a given duration, passing in a progress value each time to be used to drive the animation.
@@ -109,10 +111,10 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
  */
 + (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
                                  delay:(NSTimeInterval)delay
-                                easing:(INTUEasingFunction)easingFunction
+                                easing:(__INTU_NULLABLE INTUEasingFunction)easingFunction
                                options:(INTUAnimationOptions)options
-                            animations:(void (^)(CGFloat progress))animations
-                            completion:(void (^)(BOOL finished))completion;
+                            animations:(__INTU_NULLABLE void (^)(CGFloat progress))animations
+                            completion:(__INTU_NULLABLE void (^)(BOOL finished))completion;
 
 /**
  Executes a block of animations multiple times over a duration that is determined by the physics of a spring, passing in a progress value each
@@ -135,8 +137,8 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
                             stiffness:(CGFloat)stiffness
                                  mass:(CGFloat)mass
                                 delay:(NSTimeInterval)delay
-                           animations:(void (^)(CGFloat progress))animations
-                           completion:(void (^)(BOOL finished))completion;
+                           animations:(__INTU_NULLABLE void (^)(CGFloat progress))animations
+                           completion:(__INTU_NULLABLE void (^)(BOOL finished))completion;
 
 /**
  Cancels the currently active animation with the given animation ID.
@@ -146,3 +148,5 @@ typedef NS_OPTIONS(NSUInteger, INTUAnimationOptions) {
 + (void)cancelAnimationWithID:(INTUAnimationID)animationID;
 
 @end
+
+__INTU_ASSUME_NONNULL_END

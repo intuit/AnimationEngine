@@ -60,6 +60,7 @@
 		B176B41119C5065300D3BA31 /* AnimationEngineExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnimationEngineExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B176B41619C5065300D3BA31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B176B42E19C5076D00D3BA31 /* AnimationEngineInterpolationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationEngineInterpolationTests.m; sourceTree = "<group>"; };
+		B1D1242C1B755EE8000282D2 /* INTUDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = INTUDefines.h; path = ../../INTUAnimationEngine/INTUDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +158,7 @@
 			children = (
 				B12DD47B1AEC693B007CD42C /* INTUAnimationEngine.h */,
 				B12DD47C1AEC693B007CD42C /* INTUAnimationEngine.m */,
+				B1D1242C1B755EE8000282D2 /* INTUDefines.h */,
 				B12DD47D1AEC693B007CD42C /* INTUEasingFunctions.h */,
 				B12DD47E1AEC693B007CD42C /* INTUEasingFunctions.m */,
 				B12DD47F1AEC693B007CD42C /* INTUInterpolationFunctions.h */,

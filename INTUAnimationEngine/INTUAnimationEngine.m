@@ -31,6 +31,8 @@
 
 #pragma mark - INTUAnimation
 
+__INTU_ASSUME_NONNULL_BEGIN
+
 /**
  An internal class that represents an animation.
  */
@@ -41,11 +43,11 @@
 // These properties correspond directly to the parameters when creating a new animation with INTUAnimationEngine.
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) NSTimeInterval delay;
-@property (nonatomic, assign) INTUEasingFunction easingFunction;
+@property (nonatomic, copy, __INTU_NULLABLE) INTUEasingFunction easingFunction;
+@property (nonatomic, copy, __INTU_NULLABLE) void (^animations)(CGFloat);
+@property (nonatomic, copy, __INTU_NULLABLE) void (^completion)(BOOL);
 @property (nonatomic, assign) BOOL repeat; // INTUAnimationOptionRepeat
 @property (nonatomic, assign) BOOL autoreverse; // INTUAnimationOptionAutoreverse
-@property (nonatomic, copy) void (^animations)(CGFloat);
-@property (nonatomic, copy) void (^completion)(BOOL);
 
 @property (nonatomic, assign) CFTimeInterval startTime;
 
@@ -59,6 +61,8 @@
 - (void)complete:(BOOL)finished;
 
 @end
+
+__INTU_ASSUME_NONNULL_END
 
 @implementation INTUAnimation
 
@@ -226,7 +230,7 @@ static INTUAnimationID _nextAnimationID = 0;
 
 // A dictionary that associates animation IDs to active animations. It is in the format:
 //      { NSNumber *animationID : INTUAnimation *animation, ... }
-@property (nonatomic, strong) NSDictionary *activeAnimations;
+@property (nonatomic, strong) __INTU_GENERICS(NSDictionary, NSNumber *, INTUAnimation *) *activeAnimations;
 
 @property (nonatomic, strong) CADisplayLink *displayLink;
 
@@ -358,7 +362,7 @@ static id _sharedInstance;
         self.displayLink.paused = NO;
     }
     animation.startTime = CACurrentMediaTime();
-    NSMutableDictionary *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
+    __INTU_GENERICS(NSMutableDictionary, NSNumber *, INTUAnimation *) *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
     [newActiveAnimations setObject:animation forKey:@(animation.animationID)];
     self.activeAnimations = newActiveAnimations;
 }
@@ -367,7 +371,7 @@ static id _sharedInstance;
 {
     INTUAnimation *animation = [self.activeAnimations objectForKey:@(animationID)];
     [animation complete:finished];
-    NSMutableDictionary *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
+    __INTU_GENERICS(NSMutableDictionary, NSNumber *, INTUAnimation *) *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
     [newActiveAnimations removeObjectForKey:@(animationID)];
     self.activeAnimations = newActiveAnimations;
     if ([self.activeAnimations count] == 0) {
