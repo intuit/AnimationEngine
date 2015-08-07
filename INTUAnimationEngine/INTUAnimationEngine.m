@@ -225,7 +225,7 @@ static INTUAnimationID _nextAnimationID = 0;
 
 // A dictionary that associates animation IDs to active animations. It is in the format:
 //      { NSNumber *animationID : INTUAnimation *animation, ... }
-@property (nonatomic, strong) NSMutableDictionary *activeAnimations;
+@property (nonatomic, strong) NSDictionary *activeAnimations;
 
 @property (nonatomic, strong) CADisplayLink *displayLink;
 
@@ -325,7 +325,6 @@ static id _sharedInstance;
 {
     self = [super init];
     if (self) {
-        _activeAnimations = [NSMutableDictionary new];
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tickActiveAnimations)];
         _displayLink.paused = YES;
         [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes]; // NSRunLoopCommonModes will cause the display link to fire even during scroll view scrolling, etc
@@ -362,14 +361,18 @@ static id _sharedInstance;
         self.displayLink.paused = NO;
     }
     animation.startTime = CACurrentMediaTime();
-    [self.activeAnimations setObject:animation forKey:@(animation.animationID)];
+    NSMutableDictionary *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
+    [newActiveAnimations setObject:animation forKey:@(animation.animationID)];
+    self.activeAnimations = newActiveAnimations;
 }
 
 - (void)removeAnimationWithID:(INTUAnimationID)animationID didFinish:(BOOL)finished
 {
     INTUAnimation *animation = [self.activeAnimations objectForKey:@(animationID)];
     [animation complete:finished];
-    [self.activeAnimations removeObjectForKey:@(animationID)];
+    NSMutableDictionary *newActiveAnimations = [NSMutableDictionary dictionaryWithDictionary:self.activeAnimations];
+    [newActiveAnimations removeObjectForKey:@(animationID)];
+    self.activeAnimations = newActiveAnimations;
     if ([self.activeAnimations count] == 0) {
         self.displayLink.paused = YES;
     }
