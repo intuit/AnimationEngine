@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'SpringSolver' do |ss|
     ss.source_files = 'INTUAnimationEngine/SpringSolver/*.{h,c}'
-    ss.license      = { :type => 'BSD', :file => 'LICENSE-SpringSolver' }
+    # Note: CocoaPods no longer supports a separate license for a subspec, but the below license applies to the SpringSolver.
+    # ss.license      = { :type => 'BSD', :file => 'LICENSE-SpringSolver' }
   end
 end
