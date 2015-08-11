@@ -1,5 +1,5 @@
 //
-//  INTUDefines.h
+//  INTUAnimationEngineDefines.h
 //  https://github.com/intuit/AnimationEngine
 //
 //  Copyright (c) 2015 Intuit Inc.
@@ -24,8 +24,8 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#ifndef INTUDefines_h
-#define INTUDefines_h
+#ifndef INTUAnimationEngineDefines_h
+#define INTUAnimationEngineDefines_h
 
 #if __has_feature(nullability)
 #   define __INTU_ASSUME_NONNULL_BEGIN      NS_ASSUME_NONNULL_BEGIN
@@ -43,4 +43,4 @@
 #   define __INTU_GENERICS(type, ...)       type
 #endif
 
-#endif /* INTUDefines_h */
+#endif /* INTUAnimationEngineDefines_h */

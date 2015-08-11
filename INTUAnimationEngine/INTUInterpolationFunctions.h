@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "INTUDefines.h"
+#import "INTUAnimationEngineDefines.h"
 
 __INTU_ASSUME_NONNULL_BEGIN
 

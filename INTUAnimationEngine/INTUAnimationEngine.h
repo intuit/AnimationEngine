@@ -25,7 +25,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "INTUDefines.h"
+#import "INTUAnimationEngineDefines.h"
 #import "INTUEasingFunctions.h"
 #import "INTUInterpolationFunctions.h"
 
