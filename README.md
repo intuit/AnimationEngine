@@ -15,24 +15,28 @@ The project also includes a standalone spring physics library to simulate damped
 ### Using [CocoaPods](http://cocoapods.org)
 
 1.	Add the pod `INTUAnimationEngine` to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html).
+  
+  ```ruby
+  pod 'INTUAnimationEngine'
+  ```
 
-    	pod 'INTUAnimationEngine'
-
-2.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
-3.	Import the `INTUAnimationEngine.h` header. Typically, this should be written as `#import <INTUAnimationEngine/INTUAnimationEngine.h>`.
+1.	Run `pod install` from Terminal, then open your app's `.xcworkspace` file to launch Xcode.
+1.	Import the `INTUAnimationEngine.h` header. Typically, this should be written as `#import <INTUAnimationEngine/INTUAnimationEngine.h>`.
 
 #### Installing the Spring Solver Library Only
 The Spring Solver used by INTUAnimationEngine is available as a standalone C library, where it can be used for other applications (including ones that are not related to animation). The Spring Solver has its own CocoaPods subspec so that it can be installed separately from the rest of the INTUAnimationEngine project. To install the Spring Solver only, add the following line to your Podfile:
 
-    pod 'INTUAnimationEngine/SpringSolver'
+```ruby
+pod 'INTUAnimationEngine/SpringSolver'
+```
 
 Note that installing INTUAnimationEngine using `pod 'INTUAnimationEngine'` automatically includes the Spring Solver library as a dependency.
 
 ### Manually from GitHub
 
 1.	Download the contents of the [INTUAnimationEngine directory](INTUAnimationEngine).
-2.	Add all the files to your Xcode project (drag and drop is easiest).
-3.	Import the `INTUAnimationEngine.h` header.
+1.	Add all the files to your Xcode project (drag and drop is easiest).
+1.	Import the `INTUAnimationEngine.h` header.
 
 ## Usage
 The primary difference between INTUAnimationEngine and the UIView animation methods is how the `animations` block works. With the UIView methods, the `animations` block is only executed once, and the changes made to views within this block represent the new state at the end of the animation.
@@ -43,31 +47,37 @@ With INTUAnimationEngine, the `animations` block is executed many times during t
 There are a few different API methods on INTUAnimationEngine that can be used to start an animation.
 
 #### Without Easing (Linear)
-	+ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
-	                                 delay:(NSTimeInterval)delay
-	                            animations:(void (^)(CGFloat percentage))animations
-	                            completion:(void (^)(BOOL finished))completion;
+```objc
++ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+                                 delay:(NSTimeInterval)delay
+                            animations:(void (^)(CGFloat percentage))animations
+                            completion:(void (^)(BOOL finished))completion;
+```
 
 This method will start an animation that calls the `animations` block each frame of the animation, passing in a `percentage` value that represents the animation's current percentage complete. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was canceled.
 
 #### With Easing
-	+ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
-	                                 delay:(NSTimeInterval)delay
-	                                easing:(INTUEasingFunction)easingFunction
-	                            animations:(void (^)(CGFloat progress))animations
-	                            completion:(void (^)(BOOL finished))completion;
+```objc
++ (INTUAnimationID)animateWithDuration:(NSTimeInterval)duration
+                                 delay:(NSTimeInterval)delay
+                                easing:(INTUEasingFunction)easingFunction
+                            animations:(void (^)(CGFloat progress))animations
+                            completion:(void (^)(BOOL finished))completion;
+```
 
 This method will start an animation that calls the `animations` block each frame of the animation, passing in a `progress` value that represents the current progress of the animation (taking into account the easing function). The `easingFunction` can be any of the easing functions in [`INTUEasingFunctions.h`](INTUAnimationEngine/INTUEasingFunctions.h), or a block that defines a custom easing curve. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was canceled.
 
 There is also another variant of the above method that takes an `options:` parameter, which is a mask of `INTUAnimationOptions`. This can be used to repeat or autoreverse animations.
 
 #### Using a Spring
-	+ (INTUAnimationID)animateWithDamping:(CGFloat)damping
-	                            stiffness:(CGFloat)stiffness
-	                                 mass:(CGFloat)mass
-	                                delay:(NSTimeInterval)delay
-	                           animations:(void (^)(CGFloat progress))animations
-	                           completion:(void (^)(BOOL finished))completion;
+```objc
++ (INTUAnimationID)animateWithDamping:(CGFloat)damping
+                            stiffness:(CGFloat)stiffness
+                                 mass:(CGFloat)mass
+                                delay:(NSTimeInterval)delay
+                           animations:(void (^)(CGFloat progress))animations
+                           completion:(void (^)(BOOL finished))completion;
+```
 
 This method will start a spring animation that calls the `animations` block each frame of the animation, passing in a `progress` value that represents the current progress of the animation. The animation will simulate the physics of a spring-mass system with the specified properties:
 
@@ -78,7 +88,9 @@ This method will start a spring animation that calls the `animations` block each
 Note that the total duration of the animation is determined by simulating a spring-mass system with the above parameters until it reaches a resting state. The `completion` block will be executed when the animation completes, with the `finished` parameter indicating whether the animation was canceled.
 
 #### Canceling Animations
-	+ (void)cancelAnimationWithID:(INTUAnimationID)animationID;
+```objc
++ (void)cancelAnimationWithID:(INTUAnimationID)animationID;
+```
 
 When starting an animation, you can store the returned animation ID, and pass it to the above method to cancel the animation before it completes. If the animation is canceled, the completion block will execute with `finished` parameter equal to NO.
 
@@ -91,12 +103,13 @@ When starting an animation, you can store the returned animation ID, and pass it
 #### Proximal Interpolation
 For discrete values (where linear interpolation does not make sense), there are two proxmial interpolation functions. For example:
 
-    INTUInterpolateDiscrete(NSTextAlignmentLeft, NSTextAlignmentRight, progress)
-	// Returns NSTextAlignmentLeft when progress is < 0.5, NSTextAlignmentRight otherwise
-	
-    [INTUInterpolateDiscreteValues(@[@(NSTextAlignmentLeft), @(NSTextAlignmentCenter), @(NSTextAlignmentRight)], progress) integerValue]
-	// Returns NSTextAlignmentLeft, then NSTextAlignmentCenter, and finally NSTextAlignmentRight as progress increases from 0.0 to 1.0
+```objc
+INTUInterpolateDiscrete(NSTextAlignmentLeft, NSTextAlignmentRight, progress)
+// Returns NSTextAlignmentLeft when progress is < 0.5, NSTextAlignmentRight otherwise
 
+[INTUInterpolateDiscreteValues(@[@(NSTextAlignmentLeft), @(NSTextAlignmentCenter), @(NSTextAlignmentRight)], progress) integerValue]
+// Returns NSTextAlignmentLeft, then NSTextAlignmentCenter, and finally NSTextAlignmentRight as progress increases from 0.0 to 1.0
+```
 
 #### Linear Interpolation
 For continuous values, there are a variety of linear interpolation functions. The following types are supported:
@@ -115,23 +128,29 @@ There is also an untyped function `INTUInterpolate()` that takes values of type 
 ##### CGAffineTransform & CATransform3D
 There are no functions that directly interpolate transforms. This is by design: linear interpolation of raw matrices often yields unexpected or invalid results. To interpolate between two transforms, decompose them into their translation, rotation, and scale components:
 
-	CGFloat rotation = INTUInterpolateCGFloat(0.0, M_PI, progress);
-	view.transform = CGAffineTransformMakeRotation(rotation);
-	// view will rotate from upright (progress = 0.0) to upside down (progress = 1.0)
+```objc
+CGFloat rotation = INTUInterpolateCGFloat(0.0, M_PI, progress);
+view.transform = CGAffineTransformMakeRotation(rotation);
+// view will rotate from upright (progress = 0.0) to upside down (progress = 1.0)
+```
 
 You can concatenate transforms to combine them:
 
-    CGFloat rotation = INTUInterpolateCGFloat(0.0, M_PI, progress);
-    CGFloat scale = INTUInterpolateCGFloat(1.0, 0.5, progress);
-    view.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale), CGAffineTransformMakeRotation(rotation));
-	// view will rotate from upright and full size (progress = 0.0), to upside down and half size (progress = 1.0)
+```objc
+CGFloat rotation = INTUInterpolateCGFloat(0.0, M_PI, progress);
+CGFloat scale = INTUInterpolateCGFloat(1.0, 0.5, progress);
+view.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale), CGAffineTransformMakeRotation(rotation));
+// view will rotate from upright and full size (progress = 0.0), to upside down and half size (progress = 1.0)
+```
 
 ##### UIColor / CGColor
 When interpolating between two colors, both colors must be in the same color space (grayscale, RGB, or HSB). Interpolating between colors in the HSB color space will generally yield better visual results than the RGB color space.
 
-	[UIColor colorWithWhite:1.0 alpha:1.0] // Grayscale color space; white
-	[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0] // RGB color space; white
-	[UIColor colorWithHue:0.0 saturation:0.0 brightness:1.0 alpha:1.0] // HSB color space; white
+```objc
+[UIColor colorWithWhite:1.0 alpha:1.0] // Grayscale color space; white
+[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0] // RGB color space; white
+[UIColor colorWithHue:0.0 saturation:0.0 brightness:1.0 alpha:1.0] // HSB color space; white
+```
 
 ### Spring Solver
 The [SpringSolver directory](INTUAnimationEngine/SpringSolver) in the project contains a spring physics library to simulate damped harmonic motion, based on the spring solver that powers Facebook's [Pop](https://github.com/facebook/pop). The INTUAnimationEngine spring solver has been extensively refactored for simplicity and performance, and as a fully independent pure C library is highly portable to any platform and can be leveraged for other use cases beyond animation.
