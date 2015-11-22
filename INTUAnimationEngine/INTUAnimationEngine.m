@@ -343,6 +343,7 @@ static id _sharedInstance;
 - (void)tickActiveAnimations
 {
     for (INTUAnimation *animation in [self.activeAnimations objectEnumerator]) {
+        [animation tick];
         if ([animation isKindOfClass:[INTUSpringAnimation class]]) {
             INTUSpringAnimation *springAnimation = (INTUSpringAnimation *)animation;
             if (springAnimation.hasConverged) {
@@ -352,7 +353,6 @@ static id _sharedInstance;
         else if (animation.repeat == NO && animation.percentComplete >= 1.0) {
             [self removeAnimationWithID:animation.animationID didFinish:YES];
         }
-        [animation tick];
     }
 }
 
