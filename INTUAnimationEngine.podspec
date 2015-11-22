@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name                  = "INTUAnimationEngine"
-  s.version               = "1.4.1"
+  s.version               = "1.4.2"
   s.homepage              = "https://github.com/intuit/AnimationEngine"
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
   s.author                = { "Tyler Fox" => "tyler_fox@intuit.com" }
-  s.source                = { :git => "https://github.com/intuit/AnimationEngine.git", :tag => "v1.4.1" }
+  s.source                = { :git => "https://github.com/intuit/AnimationEngine.git", :tag => "v1.4.2" }
   s.source_files          = 'INTUAnimationEngine/*.{h,m}'
   s.platform              = :ios
   s.ios.deployment_target = '5.0'
